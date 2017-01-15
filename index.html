@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>문산중학교 일본어 교육 어플리케이션</title>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+
+    <style rel="stylesheet">
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1 0 auto;
+    }
+    #main_grid_box{
+      height: 100px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="navbar-fixed">
+      <nav>
+      <div class="nav-wrapper">
+        <a href="" class="brand-logo">문산중학교</a>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+      </nav>
+    </div>
+    <ul id="slide-out" class="side-nav">
+      <li><a href="/#/situation">상황별 일본어 회화</a></li>
+      <li><a href="/#/video">회화동영상</a></li>
+      <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header">일본어문화<i class="material-icons">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="#!">First</a></li>
+                <li><a href="#!">Second</a></li>
+                <li><a href="#!">Third</a></li>
+                <li><a href="#!">Fourth</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#!">First Sidebar Link</a></li>
+      <li><a href="#!">Second Sidebar Link</a></li>
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">First</a></li>
+        <li><a href="#!">Second</a></li>
+        <li><a href="#!">Third</a></li>
+        <li><a href="#!">Fourth</a></li>
+      </ul>
+    </ul>
+    <section id="main"></section>
+      <footer class="page-footer">
+         <div class="container">
+           <div class="row">
+             <div class="col l6 s12">
+               <h5 class="white-text">일본어 회화 교육 어플리케이션</h5>
+               <p class="grey-text text-lighten-4">문산중학교</p>
+             </div>
+           </div>
+         </div>
+         <div class="footer-copyright">
+           <div class="container">
+           © 2014 Copyright Text
+           <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+           </div>
+         </div>
+       </footer>
+       <div class="fixed-action-btn toolbar">
+         <a class="btn-floating btn-large red">
+           <i class="large material-icons">mode_edit</i>
+         </a>
+         <ul>
+           <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">insert_chart</i></a></li>
+           <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">format_quote</i></a></li>
+           <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">publish</i></a></li>
+           <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">attach_file</i></a></li>
+         </ul>
+       </div>
+    <!-- initialize JS -->
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="lib/backbone.localstorage.js"></script>
+    <script src="views/view.js" ></script>
+    <script src="routers/router.js" ></script>
+    <script src="models/category.js" ></script>
+    <!-- extra component -->
+    <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+    <script src="assets/js/materialize_handler.js" ></script>
+  </body>
+</html>
