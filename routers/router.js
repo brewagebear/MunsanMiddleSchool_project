@@ -4,10 +4,6 @@ var app = app || {};
     var views = app.view = app.view || {};
 
     app.Router = Backbone.Router.extend({
-        initialize: function(){
-          //this.bind("all", this.change)
-          //console.log(this.change);
-        },
         routes: {
             'situation': 'situationRoute',
             'video': 'videoRoute',
