@@ -69,4 +69,11 @@ var app = app || {};
         return this;
       }
     });
+    views.Level = Backbone.View.extend({
+      render: function(templateName) {
+        var template = _.template(templateName);
+        this.$el.html(template);
+        return this;
+      }
+    });
 })();

@@ -12,6 +12,7 @@ var app = app || {};
             'situation': 'situationRoute',
             'video': 'videoRoute',
             'culture': 'cultureRoute',
+            'level': 'levelRoute',
             //와일드카드 디폴트 라우터는 맨 마지막에 삽입.
             '*home': 'homeRoute'
         },
@@ -47,6 +48,11 @@ var app = app || {};
         cultureRoute: function(){
             var view = new views.Culture();
             var target = 'Culture';
+            this.layout.setContent(view, target);
+        },
+        levelRoute: function(){
+            var view = new views.Level();
+            var target = 'Level';
             this.layout.setContent(view, target);
         }
       });
