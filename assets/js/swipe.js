@@ -1,5 +1,12 @@
+/**
+ slick.js 기반 스와이프 javascript
+ '17 01. 31
+ 액티브 탭 클릭 시 그 탭이 3개 나열되어있을때 처음 탭이 그 row의 첫번째로 선택하는 경향이 있음.
+ 1, 2, 3, 4 탭이 있으면
+*/
 $(function () {
 'use strict';
+// global val
   var $swipeTabsContainer = $('.swipe-tabs'),
       $swipeTabs = $('.swipe-tab'),
       $swipeTabsContentContainer = $('.swipe-tabs-container'),
@@ -38,30 +45,27 @@ $swipeTabsContentContainer.slick({
   touchThreshold: 10
 });
 
-$swipeTabs.on('click', function(event) {
-  // gets index of clicked tab
-  currentIndex = $(this).data('slick-index');
+var slideNswipe = function(currentIndex){
   $swipeTabs.removeClass(activeTabClassName);
   $('.swipe-tab[data-slick-index=' + currentIndex +']').addClass(activeTabClassName);
   $swipeTabsContainer.slick('slickGoTo', currentIndex);
   $swipeTabsContentContainer.slick('slickGoTo', currentIndex);
+}
 
-  $priviousBtn.on('click', function(event){
-    priviousIndex = $(this).attr('id');
-    currentIndex = priviousIndex;
-    $swipeTabs.removeClass(activeTabClassName);
-    $('.swipe-tab[data-slick-index=' + currentIndex +']').addClass(activeTabClassName);
-    $swipeTabsContainer.slick('slickGoTo', currentIndex);
-    $swipeTabsContentContainer.slick('slickGoTo', currentIndex);
-  });
+$swipeTabs.on('click', function(event) {
+  currentIndex = $(this).data('slick-index');
+  slideNswipe(currentIndex);
+});
 
-  $backBtn.on('click', function(event){
-    currentIndex = 0;
-    $swipeTabs.removeClass(activeTabClassName);
-    $('.swipe-tab[data-slick-index=' + currentIndex +']').addClass(activeTabClassName);
-    $swipeTabsContainer.slick('slickGoTo', currentIndex);
-    $swipeTabsContentContainer.slick('slickGoTo', currentIndex);
-  });
+$priviousBtn.on('click', function(event){
+  priviousIndex = $(this).attr('id');
+  currentIndex = priviousIndex;
+  slideNswipe(currentIndex);
+});
+
+$backBtn.on('click', function(event){
+  currentIndex = 0;
+  slideNswipe(currentIndex);
 });
 
   //initializes slick navigation tabs swipe handler

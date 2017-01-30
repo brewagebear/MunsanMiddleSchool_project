@@ -1,3 +1,9 @@
+<!--
+ 중복성 제거를 위해 각 탭 클릭시에 각각 페이지 로딩을 해야함.
+ view단 처리.
+ 1번탭 눌렀을 시에 비동기로 각각의 탭의 페이지를 호출하게끔 하면 될 듯.
+ jplayer 사용 (audio)
+ -->
 <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
 <link rel="stylesheet" type="text/css" href="assets/css/swipe.css"/>
@@ -6,7 +12,6 @@
     <div class="swipe-tab">거실</div>
     <div class="swipe-tab">목욕탕</div>
     <div class="swipe-tab">생일</div>
-    <div class="swipe-tab">세면대</div>
     <div class="swipe-tab">세탁</div>
     <div class="swipe-tab">아침식사</div>
     <div class="swipe-tab">책상</div>
@@ -17,45 +22,126 @@
 </div>
 <div class="main-container">
   <div class="swipe-tabs-container ">
-    <div class="swipe-tab-content">Tab 1
-      <a href="#/home" class="locate_main">메인으로</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/livingroom.png" alt="" class="mainTheme">
+      <div class="content">
+      </div>
+      <div class="btnLayer">
+        <a href="#/home" class="locate_main">메인으로</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 2
-      <a class="back_btn" href="#/level">이전</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/baths.png" alt="" class="mainTheme">
+      <div class="content">Tab 2</div>
+      <div class="btnLayer">
+        <a class="back_btn" href="#/level">이전</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 3
-      <a class="privious_btn" id= "1" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/birthday.png" alt="" class="mainTheme">
+      <div class="content">Tab 3</div>
+      <div class="btnLayer">
+        <a class="privious_btn" id= "1" href="#/level">이전</a>
+        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 4
-      <a class="privious_btn" id= "2" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/laundry.png" alt="" class="mainTheme">
+      <div class="content">Tab 4</div>
+      <div class="btnLayer">
+        <a class="privious_btn" id= "2" href="#/level">이전</a>
+        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 5
-      <a class="privious_btn" id= "3" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/breakfirst.png" alt="" class="mainTheme">
+      <div class="content">Tab 5</div>
+      <div class="btnLayer">
+        <a class="privious_btn" id= "3" href="#/level">이전</a>
+        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 6
-      <a class="privious_btn" id= "4" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/desk.png" alt="" class="mainTheme">
+      <div class="content">Tab 6</div>
+      <div class="btnLayer">
+        <a class="privious_btn" id= "4" href="#/level">이전</a>
+        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 7
-      <a class="privious_btn" id= "5" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/cleaning.png" alt="" class="mainTheme">
+      <div class="content">Tab 7</div>
+      <div class="btnLayer">
+        <a class="privious_btn" id= "5" href="#/level">이전</a>
+        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 8
-      <a class="privious_btn" id= "6" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/bedroom.png" alt="" class="mainTheme">
+      <div class="content">
+        <div class="row">
+          <div class="col s4">
+            <audio controls>
+              <source src="assets/audios/bedroom/bedroom_1.mp3" type="audio/mp3">
+            </audio>
+            <p class="word_test">スタンド</p>
+          </div>
+          <div class="col s4">
+            <p class="word_test">めざましいどけい</p>
+          </div>
+          <div class="col s4" >
+            <p class="word_test">めがね</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s4">
+            <p class="word_test">けいたい</p>
+          </div>
+          <div class="col s4">
+            <p class="word_test">シーツ</p>
+          </div>
+          <div class="col s4">
+            <p class="word_test">ねこ</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s4">
+            <p class="word_test">ねまき</p>
+          </div>
+          <div class="col s4">
+            <p class="word_test">まくら</p>
+          </div>
+          <div class="col s4">
+            <p class="word_test">ベット</p>
+          </div>
+        </div>
+      </div>
+      <div class="btnLayer">
+        <a class="privious_btn" id= "6" href="#/level">이전</a>
+        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+      </div>
     </div>
-    <div class="swipe-tab-content">Tab 9
-      <a class="privious_btn" id= "7" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
-    </div>
-    <div class="swipe-tab-content">Tab 10
-      <a class="privious_btn" id= "8" href="#/level">이전</a>
-      <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    <div class="swipe-tab-content">
+      <img src="assets/img/entrance.png" alt="" class="mainTheme">
+      <div class="content">Tab 9</div>
+      <div class="btnLayer">
+        <a class="privious_btn" id= "7" href="#/level">이전</a>
+        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+      </div>
     </div>
   </div>
 </div>
 <script type="text/javascript" src="lib/slick.min.js"></script>
 <script type="text/javascript" src="assets/js/swipe.js"></script>
+<!--
+スタンド(스탠드)
+bedroom_1: スタンド(스탠드)
+bedroom_2: めざましいどけい(알람시계)
+bedroom_3:　めがね(안경)
+bedroom_4:　けいたい(휴대전화)
+bedroom_5:　シーツ(시트)
+bedroom_6:　ねこ(고양이)
+bedroom_7:　ねまき(잠옷)
+bedroom_8:　まくら(배게)
+bedroom_9:　ベット(침대) -->
