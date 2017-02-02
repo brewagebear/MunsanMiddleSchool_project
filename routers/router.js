@@ -8,7 +8,7 @@ var app = app || {};
             'situation': 'situationRoute',
             'video': 'videoRoute',
             'culture': 'cultureRoute',
-            'level': 'levelRoute',
+            'level': 'livingwordsRoute',
             //와일드카드 디폴트 라우터는 맨 마지막에 삽입.
             '*home': 'homeRoute'
         },
@@ -46,9 +46,9 @@ var app = app || {};
             var target = 'Culture';
             this.layout.setContent(view, target);
         },
-        levelRoute: function(){
+        livingwordsRoute: function(){
             var view = new views.Level();
-            var target = 'Level';
+            var target = 'livingwords';
             this.layout.setContent(view, target);
         }
       });
