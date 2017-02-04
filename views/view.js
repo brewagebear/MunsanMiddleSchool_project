@@ -31,7 +31,6 @@ var app = app || {};
                     tmpl_string = data;
                 }
             });
-            tmpl_string = tmpl_string.toLowerCase();
             this.$content.html(content.render(tmpl_string).el);
         },
         showSpinner: function() {

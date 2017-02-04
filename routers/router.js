@@ -28,22 +28,22 @@ var app = app || {};
         },
         homeRoute: function() {
             var view = new views.Home();
-            var target = 'Home';
+            var target = 'home';
             this.layout.setContent(view, target);
         },
         situationRoute: function() {
             var view = new views.Situation();
-            var target = 'Situation';
+            var target = 'situation';
             this.layout.setContent(view, target);
         },
         videoRoute: function() {
             var view = new views.Video();
-            var target = 'Video';
+            var target = 'video';
             this.layout.setContent(view, target);
         },
         cultureRoute: function(){
             var view = new views.Culture();
-            var target = 'Culture';
+            var target = 'culture';
             this.layout.setContent(view, target);
         },
         livingwordsRoute: function(){
