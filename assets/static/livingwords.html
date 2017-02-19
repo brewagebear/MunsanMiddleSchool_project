@@ -8,21 +8,25 @@
    .mainTheme{
      width: inherit;
    }
+   .word_test{
+     font-weight: bold;
+   }
  </style>
 <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
 <link rel="stylesheet" type="text/css" href="assets/css/swipe.css"/>
+<link rel="stylesheet" type="text/css" href="assets/css/mp3-player-button.css">
 <div class="sub-header">
   <div class="swipe-tabs">
-    <div class="swipe-tab">거실</div>
-    <div class="swipe-tab">목욕탕</div>
-    <div class="swipe-tab">생일</div>
-    <div class="swipe-tab">세탁</div>
-    <div class="swipe-tab">아침식사</div>
-    <div class="swipe-tab">책상</div>
-    <div class="swipe-tab">청소</div>
-    <div class="swipe-tab">침실</div>
-    <div class="swipe-tab">현관</div>
+    <div class="swipe-tab lime lighten-5">거실</div>
+    <div class="swipe-tab lime lighten-4">목욕탕</div>
+    <div class="swipe-tab lime lighten-3">생일</div>
+    <div class="swipe-tab lime lighten-2">세탁</div>
+    <div class="swipe-tab lime lighten-1">아침식사</div>
+    <div class="swipe-tab lime">책상</div>
+    <div class="swipe-tab lime accent-2">청소</div>
+    <div class="swipe-tab lime accent-3">침실</div>
+    <div class="swipe-tab lime accent-4">현관</div>
   </div>
 </div>
 <div class="main-container">
@@ -76,6 +80,10 @@
     </div>
     <div class="swipe-tab-content">
       <img src="assets/img/cleaning.png" alt="" class="mainTheme">
+      <div class="row">
+        <div class="col s4">
+        </div>
+      </div>
       <div class="content">Tab 7</div>
       <div class="btnLayer">
         <a class="privious_btn" id= "5" href="#/level">이전</a>
@@ -87,37 +95,43 @@
       <div class="content">
         <div class="row">
           <div class="col s4">
-            <audio controls>
-              <source src="assets/audios/bedroom/bedroom_1.mp3" type="audio/mp3">
-            </audio>
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_1.mp3" class="sm2_button" title="Play &quot;stand&quot;"></a>①</p>
             <p class="word_test">スタンド</p>
           </div>
           <div class="col s4">
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_2.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>②</p>
             <p class="word_test">めざましいどけい</p>
           </div>
           <div class="col s4" >
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_3.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>③</p>
             <p class="word_test">めがね</p>
           </div>
         </div>
         <div class="row">
           <div class="col s4">
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_4.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>④</p>
             <p class="word_test">けいたい</p>
           </div>
           <div class="col s4">
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_5.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>⑤</p>
             <p class="word_test">シーツ</p>
           </div>
           <div class="col s4">
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_6.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>⑥</p>
             <p class="word_test">ねこ</p>
           </div>
         </div>
         <div class="row">
           <div class="col s4">
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_7.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>⑦</p>
             <p class="word_test">ねまき</p>
           </div>
           <div class="col s4">
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_8.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>⑧</p>
             <p class="word_test">まくら</p>
           </div>
           <div class="col s4">
+            <p class="wordPlay"><a href="assets/audios/bedroom/bedroom_9.mp3" class="sm2_button" title="Play &quot;coins&quot;"></a>⑨</p>
             <p class="word_test">ベット</p>
           </div>
         </div>
@@ -137,8 +151,10 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="lib/slick.min.js"></script>
-<script type="text/javascript" src="assets/js/swipe.js"></script>
+<script src="lib/slick.min.js"></script>
+<script src="assets/js/swipe.js"></script>
+<script src="assets/js/soundmanager2.js" charset="utf-8"></script>
+<script src="assets/js/mp3-player-button.js"></script>
 <!--
 スタンド(스탠드)
 bedroom_1: スタンド(스탠드)

@@ -55,7 +55,10 @@ var app = app || {};
         return this;
       }
     });
-    views.Video = Backbone.View.extend({
+    views.list = Backbone.View.extend({
+      // initialize: function(){
+      //   this.collection = new app.collection();
+      // },
       render: function(templateName) {
         var template = _.template(templateName);
         this.$el.html(template);

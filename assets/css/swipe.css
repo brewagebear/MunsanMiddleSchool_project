@@ -1,9 +1,12 @@
 .slick-initialized .swipe-tab-content {
   position: relative;
   min-height: 365px; }
-  @media screen and (min-width: 767px) {
-    .slick-initialized .swipe-tab-content {
-      min-height: 500px; } }
+
+@media screen and (min-width: 767px) {
+.slick-initialized .swipe-tab-content {
+      min-height: 500px; }
+}
+
 .slick-initialized .swipe-tab {
   display: flex;
   align-items: center;
