@@ -88,9 +88,6 @@ var app = app || {};
       render: function(templateName) {
         var template = _.template(templateName);
         this.$el.html(template({result : this.collection.models}));
-        _.each(this.collection.models, function(model){
-          console.log(model.get("id"));
-        });
         return this;
       }
     });
@@ -105,11 +102,7 @@ var app = app || {};
       render: function(templateName) {
         var template = _.template(templateName);
         _.each(this.collection.models, function(model){
-          for(var i in model.attributes){
-            if (model.attributes.hasOwnProperty(i)){
-              console.log(model.attributes[i]);
-            }
-          }
+          console.log(model.attributes);
         });
         this.$el.html(template({result : this.collection.model}));
         return this;

@@ -26,13 +26,13 @@
      <div class="nav-wrapper">
        <div class="col s12">
          <a href="#!" class="breadcrumb">상황별 일본어 회화</a>
-         <a href="#!" class="breadcrumb">병원</a>
+         <% _.each(result, function(model){ %>
+         <a href="<%- model.get("categoryNum") %>" class="breadcrumb"><%- model.get("category")%></a>
        </div>
      </div>
   </nav>
   </div>
       <div id="columns">
-      <% _.each(result, function(model){ %>
         <div id="<%- model.get("id") %>" class="content">
           <a href="<%- model.get("url") %>">
             <figure>
