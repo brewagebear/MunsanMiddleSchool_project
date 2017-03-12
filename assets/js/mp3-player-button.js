@@ -21,6 +21,7 @@ function BasicMP3Player() {
       sm = soundManager, // soundManager instance
       isTouchDevice = (navigator.userAgent.match(/ipad|iphone/i)),
       isIE = (navigator.userAgent.match(/msie/i));
+
   this.excludeClass = 'button-exclude'; // CSS class for ignoring MP3 links
   this.links = [];
   this.sounds = [];
@@ -100,6 +101,12 @@ function BasicMP3Player() {
       pl.removeClass(this._data.oLink,this._data.className);
       this._data.className = pl.css.sPlaying;
       pl.addClass(this._data.oLink,this._data.className);
+
+      var id = this._data.oLink.id;
+      id = id.replace(/[^0-9]/g,'');
+      $('#circle'+id).css('background-color', 'white');
+      $('#blindword'+id).css('display', 'none');
+      $('#word_test'+id).css('display', 'block');
     },
 
     stop: function() {
@@ -116,12 +123,19 @@ function BasicMP3Player() {
     resume: function() {
       pl.removeClass(this._data.oLink,this._data.className);
       this._data.className = pl.css.sPlaying;
-      pl.addClass(this._data.oLink,this._data.className);      
+      pl.addClass(this._data.oLink,this._data.className);
     },
 
     finish: function() {
       pl.removeClass(this._data.oLink,this._data.className);
       this._data.className = '';
+
+      var id = this._data.oLink.id;
+      id = id.replace(/[^0-9]/g,'');
+      $('#circle'+id).css('background-color', 'black');
+      $('#blindword'+id).css('display', 'block');
+      $('#word_test'+id).css('display', 'none');
+
       if (pl.config.playNext) {
         var nextLink = (pl.indexByURL[this._data.oLink.href]+1);
         if (nextLink<pl.links.length) {

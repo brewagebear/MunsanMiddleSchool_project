@@ -16,7 +16,7 @@ $(function () {
       priviousIndex = 0,
       activeTabClassName = 'active-tab';
 
-  $swipeTabsContainer.on('init', function(event, slick) {
+    $swipeTabsContainer.on('init', function(event, slick) {
     $swipeTabsContentContainer.removeClass('invisible');
     $swipeTabsContainer.removeClass('invisible');
 
@@ -51,18 +51,18 @@ var slideNswipe = function(currentIndex){
   $swipeTabsContainer.slick('slickGoTo', currentIndex);
   $swipeTabsContentContainer.slick('slickGoTo', currentIndex);
 }
-
+//go tab
 $swipeTabs.on('click', function(event) {
   currentIndex = $(this).data('slick-index');
   slideNswipe(currentIndex);
 });
-
+//go ahead
 $priviousBtn.on('click', function(event){
   priviousIndex = $(this).attr('id');
   currentIndex = priviousIndex;
   slideNswipe(currentIndex);
 });
-
+//go first
 $backBtn.on('click', function(event){
   currentIndex = 0;
   slideNswipe(currentIndex);

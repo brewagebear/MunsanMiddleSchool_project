@@ -1,7 +1,4 @@
-<!doctype html>
-<html>
-  <head>
-    <style>
+<style>
       #columns{
         column-width:350px;
         column-gap: 15px;
@@ -11,7 +8,7 @@
         border:1px solid rgba(0,0,0,0.2);
         margin:0;
         padding:10px;
-        box-shadow: 1px 1px 2px rgba(0,0,0,0.5);;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         width: 100%;
       }
       #columns figure img{
@@ -22,68 +19,26 @@
         padding:10px;
         margin-top:11px;
       }
-    </style>
-  </head>
-  <body>
-    <div id="columns">
-      <div class="content">
-      <a href="/assets/videos/call/MOV01718.mp4">
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/cinderella.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-      </a>
+</style>
+  <div class="loading">Loading&#8230;</div>
+  <div class="navBar">
+  <nav>
+     <div class="nav-wrapper">
+       <div class="col s12">
+         <a href="#!" class="breadcrumb">상황별 일본어 회화</a>
+         <a href="#!" class="breadcrumb">병원</a>
+       </div>
+     </div>
+  </nav>
+  </div>
+      <div id="columns">
+      <% _.each(result, function(model){ %>
+        <div id="<%- model.get("id") %>" class="content">
+          <a href="<%- model.get("url") %>">
+            <figure>
+              <img src="<%- model.get("imgSrc") %>">
+              <figcaption><%- model.get("title") %></figcaption>
+            </figure>
+        </div>
+      <% }); %>
       </div>
-      <!--
-      <script type="text/template" id="list-template">
-      <div class="content">
-        <a href="<%= list.url %>"></a>
-        <figure id="<%= list.id %>">
-          <img src="<%= list.imgStc %>" alt="">
-          <figcaption><%= list.title%></figcaption>
-        </figure>
-      </div>
-      </script>     -->
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/rapunzel.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/belle.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/mulan_2.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sleeping-beauty.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/pocahontas_2.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/snow-white.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ariel.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-
-      <figure>
-        <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/tiana.jpg">
-        <figcaption>동영상1</figcaption>
-      </figure>
-    </div>
-  </body>
-</html>

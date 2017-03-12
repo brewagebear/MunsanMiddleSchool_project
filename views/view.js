@@ -6,38 +6,68 @@ var app = app || {};
     views.Application = Backbone.View.extend({
         initialize: function() {
            this.$content = this.$('#main');
-            //this.$loading = this.$('#loading');
         },
-        setContent: function(view, target) {
-            var content = this.content;
-            var subUrl = this.target;
+        setContent: function() {
+           var paramCount = arguments;
+           switch (paramCount.length) {
+             case 2:
+               var content = this.content;
+               var pageSelect = this.target;
 
-            if (content) content.remove();
+               if (content) content.remove();
 
-            content = this.content = view;
-            subUrl = this.target = target;
+               content = this.content = paramCount[0];
+               pageSelect = this.target = paramCount[1];
 
-            var templateName = subUrl;
-            var tmpl_dir = '../assets/static';
-            var tmpl_url = tmpl_dir + '/' + templateName + '.html';
-            var tmpl_string = '';
+               var templateName = pageSelect;
+               var tmpl_dir = '../assets/static';
+               var tmpl_url = tmpl_dir + '/' + templateName + '.html';
+               var tmpl_string = '';
 
-            $.ajax({
-                url: tmpl_url,
-                method: 'GET',
-                async: false,
-                dataType : 'html',
-                success: function (data) {
-                    tmpl_string = data;
-                }
-            });
-            this.$content.html(content.render(tmpl_string).el);
+               $.ajax({
+                   url: tmpl_url,
+                   method: 'GET',
+                   async: false,
+                   dataType : 'html',
+                   success: function (data) {
+                       tmpl_string = data;
+                   }
+               });
+               console.log('Name :'+ templateName + ' tmpl_dir :' + tmpl_dir + ' tmpl_url :' +tmpl_url);
+               this.$content.html(content.render(tmpl_string).el);
+             break;
+             case 3:
+               var content = this.content;
+               var pageSelect = this.target;
+               var subUrl = this.url;
+
+               if (content) content.remove();
+
+               content = this.content = paramCount[0];
+               pageSelect  = this.target = paramCount[1];
+               subUrl = this.url = paramCount[2];
+
+               var templateName = subUrl;
+               var tmpl_dir = '../assets/static';
+               var tmpl_url = tmpl_dir + '/' + templateName + '.html';
+               var tmpl_string = '';
+
+               $.ajax({
+                   url: tmpl_url,
+                   method: 'GET',
+                   async: false,
+                   dataType : 'html',
+                   success: function (data) {
+                       tmpl_string = data;
+                   }
+               });
+               console.log('Name :'+ templateName + ' tmpl_dir :' + tmpl_dir + ' tmpl_url :' +tmpl_url);
+               this.$content.html(content.render(tmpl_string).el);
+             break;
+           }//switch ~ case end.
         },
-        showSpinner: function() {
-          this.$loading.show();
-        },
-        hideSpinner: function() {
-          this.$loading.hide();
+        showSpinner: function(time){
+            $('.loading').show(0).delay(time).hide(0);
         }
     });
     views.Home = Backbone.View.extend({
@@ -46,7 +76,6 @@ var app = app || {};
         this.$el.html(template);
         return this;
       }
-        //how to get return result? in parent object?
     });
     views.Situation = Backbone.View.extend({
       render: function(templateName) {
@@ -56,12 +85,12 @@ var app = app || {};
       }
     });
     views.list = Backbone.View.extend({
-      // initialize: function(){
-      //   this.collection = new app.collection();
-      // },
       render: function(templateName) {
         var template = _.template(templateName);
-        this.$el.html(template);
+        this.$el.html(template({result : this.collection.models}));
+        _.each(this.collection.models, function(model){
+          console.log(model.get("id"));
+        });
         return this;
       }
     });
@@ -72,10 +101,17 @@ var app = app || {};
         return this;
       }
     });
-    views.Level = Backbone.View.extend({
+    views.Livingword = Backbone.View.extend({
       render: function(templateName) {
         var template = _.template(templateName);
-        this.$el.html(template);
+        _.each(this.collection.models, function(model){
+          for(var i in model.attributes){
+            if (model.attributes.hasOwnProperty(i)){
+              console.log(model.attributes[i]);
+            }
+          }
+        });
+        this.$el.html(template({result : this.collection.model}));
         return this;
       }
     });
