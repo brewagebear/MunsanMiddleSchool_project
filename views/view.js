@@ -37,8 +37,8 @@ var app = app || {};
                this.$content.html(content.render(tmpl_string).el);
              break;
              case 3:
-               var content = this.content;
-               var pageSelect = this.target;
+               content = this.content;
+               pageSelect = this.target;
                var subUrl = this.url;
 
                if (content) content.remove();
@@ -47,10 +47,10 @@ var app = app || {};
                pageSelect  = this.target = paramCount[1];
                subUrl = this.url = paramCount[2];
 
-               var templateName = subUrl;
-               var tmpl_dir = '../assets/static';
-               var tmpl_url = tmpl_dir + '/' + templateName + '.html';
-               var tmpl_string = '';
+               templateName = subUrl;
+               tmpl_dir = '../assets/static';
+               tmpl_url = tmpl_dir + '/' + templateName + '.html';
+               tmpl_string = '';
 
                $.ajax({
                    url: tmpl_url,
@@ -101,10 +101,7 @@ var app = app || {};
     views.Livingword = Backbone.View.extend({
       render: function(templateName) {
         var template = _.template(templateName);
-        _.each(this.collection.models, function(model){
-          console.log(model.attributes);
-        });
-        this.$el.html(template({result : this.collection.model}));
+        this.$el.html(template({categories: this.model.category}));
         return this;
       }
     });

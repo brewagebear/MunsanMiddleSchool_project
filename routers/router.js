@@ -8,8 +8,8 @@ var app = app || {};
     app.Router = Backbone.Router.extend({
         routes: {
             'list/:id': 'listRoute',
-            'culture/:id': 'cultureRoute',
             'situation': 'situationRoute',
+            'culture': 'cultureRoute',
             'livingword': 'livingwordRoute',
             //Wildcard is placed lastline.
             '*home': 'homeRoute'
@@ -45,7 +45,6 @@ var app = app || {};
         },
         listRoute: function() {
             var url = Backbone.history.getFragment();
-            console.log(url);
             var view = {};
             var lists = {};
             var target = 'list';
@@ -54,7 +53,6 @@ var app = app || {};
             var categoryName = ['전화', '저녁', '기타표현', '병원', '생생일본어', '쇼핑', '스포츠', '관광', '교통'];
             var urlLength = ['list/1', 'list/2', 'list/3', 'list/4', 'list/5', 'list/6', 'list/7', 'list/8', 'list/9', 'list/10']
             var jsonInfo;
-
 
             switch (url) {
               case 'list/1':
@@ -111,13 +109,6 @@ var app = app || {};
                 break;
             }
 
-            if(jQuery.inArray(url, urlLength) == -1){
-              alert('잘못된 url입니다.');
-              $(location).attr('href', '/');
-            } else {
-              jsonInfo = generateList(createListFlag, categoryName, categoryNum);
-            }
-
             var generateList = function(flages, categoryName, categoryNum){
               var listArray = new Array();
               var listInfo = new Object();
@@ -147,38 +138,38 @@ var app = app || {};
                 jsonInfo = listArray;
                 return jsonInfo;
               }
-            lists = new this.lists();
-            lists.add(jsonInfo);
-            view = new views.list({collection:lists});
-            this.layout.setContent(view, target);
-            this.layout.showSpinner(500);
+
+              if(jQuery.inArray(url, urlLength) == -1){
+                target = 'videoTotalList';
+                lists = new this.lists();
+                view = new views.list({collection:lists});
+                this.layout.setContent(view, target);
+                this.layout.showSpinner(300);
+              } else {
+                jsonInfo = generateList(createListFlag, categoryName, categoryNum);
+                lists = new this.lists();
+                lists.add(jsonInfo);
+                view = new views.list({collection:lists});
+                this.layout.setContent(view, target);
+                this.layout.showSpinner(500);
+              }
         },
         cultureRoute: function(){
-            var url = Backbone.history.getFragment();
-            var view = {};
-            var target = '';
-            switch (url) {
-              case 'culture/1':
-                view = new views.Culture();
-                target = '1';
-                this.layout.setContent(view, target, url);
-                break;
-              default:
-            }
+            var target = 'culture';
+            var view = new views.Culture();
+            this.layout.setContent(view, target);
         },
         livingwordRoute: function(){
           //empty Model, Collection Object created.
           var wordModel = {};
-          var wordCollection = [];
           //Parent and Child Array and Object created.
-          var wordData = new Object();
-          var temp = new Object();
-          var categoryArray = new Array();
-          var categoryInfo = new Object();
-
+          var wordData = {};
+          var wordList = {};
+          var categoryArray = [];
+          var categoryInfo = {};
           //Detailed Array
           var cnt = ['8', '12', '9', '7', '8', '6', '11', '10', '10', '8'];
-          var category = ['bedroom', 'sink', 'desk', 'blackfast', 'cleaning', 'bathroom', 'livingroom', 'entrance', 'invitation', 'washingmachine'];
+          var category = ['bedroom', 'sink', 'desk', 'blackfast', 'cleaning', 'bathroom', 'livingroom', 'entrance', 'washingmachine'];
           var number = ['', '①', '②', '③', '④', '⑤', '⑥', '⑦',  '⑧', '⑨', '⑩', '⑪', '⑫', '⑬', '⑭','⑮'];
           var wordContent = [
             [
@@ -303,29 +294,31 @@ var app = app || {};
           ];
           //Created Model and Collection.
           wordModel = new this.word();
-          wordCollection = new this.wordDatas();
-
           //Create Json as tree model.
+          var idNum = 1;
           for (var i = 0 ; i < category.length; i++) {
             for (var j = 0; j < cnt[i]; j++) {
-              var k = j+1;
-              categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+"_"+k+".mp3";
-              categoryInfo.soundId = "sound"+k;
-              categoryInfo.wordNum = number[k];
-              categoryInfo.circleId = "circle"+k;
-              categoryInfo.blindwordId = "blindword"+k;
-              categoryInfo.wordtestId = "word_test"+k;
+              var fileNum = j+1;
+              console.log(idNum);
+              categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+"_"+fileNum+".mp3";
+              categoryInfo.soundId = "sound"+idNum;
+              categoryInfo.wordNum = number[fileNum];
+              categoryInfo.circleId = "circle"+idNum;
+              categoryInfo.blindwordId = "blindword"+idNum;
+              categoryInfo.wordtestId = "word_test"+idNum;
               categoryInfo.word = wordContent[i][j];
               categoryArray.push(categoryInfo);
-              categoryInfo = new Object();
+              categoryInfo = {};
+              idNum ++;
             }
             wordData[category[i]] = categoryArray;
-            categoryArray = new Array();
+            categoryArray = [];
           }
-            wordCollection.add(wordData);
-            var view = new views.Livingword({collection:wordCollection});
+            wordList.category = wordData;
+             var jsonInfo = JSON.stringify(wordList);
+             console.log(jsonInfo);
+            var view = new views.Livingword({model:wordList});
             var target = 'livingword';
-
             this.layout.setContent(view, target);
             this.layout.showSpinner(2500);
         }

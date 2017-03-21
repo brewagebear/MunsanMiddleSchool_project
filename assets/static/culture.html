@@ -1,0 +1,165 @@
+<link type="text/css" rel="stylesheet" href="assets/css/backbone.modal.css">
+<link type="text/css" rel="stylesheet" href="assets/css/backbone.modal.theme.css">
+<style media="screen">
+/* ---- grid-item ---- */
+.grid{
+  padding: 5px;
+  max-width: 1200px;
+}
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+.grid-sizer,
+.grid-item {
+  width: calc(33.33% - 15px);
+  margin: 5px;
+}
+.grid-item {
+  height: 120px;
+  float: left;
+  background: #CCC;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+.grid-item img {
+  max-width: 100%;
+  height: auto;
+}
+.title{
+  position: absolute;
+  opacity: .75;
+  top:85%;
+  background: #000000;
+  text-align: center;
+  width: 100%;
+  color: #ffffff;
+  height: 25px;
+}
+.gird-item--width2 { width: calc(66.66% - 18px);}
+.grid-item--height2 { height: 160px; }
+.grid-item--height3 { height: 240px; }
+.grid-item--height4 { height: 360px; }
+</style>
+<ul id="tabs-swipe-culture" class="tabs">
+   <li class="tab col s3"><a class="active" href="#test-swipe-1">일본문화</a></li>
+   <li class="tab col s3"><a href="#test-swipe-2">명승지</a></li>
+   <li class="tab col s3"><a href="#test-swipe-3">성곽</a></li>
+   <li class="tab col s3"><a href="#test-swipe-4">종교</a></li>
+ </ul>
+ <div id="test-swipe-1" class="col s12 blue">
+   <div id="container">
+     <div class="item"></div>
+     <div class="item"></div>
+     <div class="item"></div>
+     <div class="item "></div>
+     <div class="item"></div>
+     <div class="item "></div>
+     <div class="item h2"></div>
+     <div class="item"></div>
+     <div class="item h2"></div>
+     <div class="item  h2"></div>
+     <div class="item"></div>
+     <div class="item"></div>
+     <div class="item h2"></div>
+     <div class="item"></div>
+     <div class="item"></div>
+     <div class="item "></div>
+     <div class="item h2"></div>
+     <div class="item"></div>
+     <div class="item h2"></div>
+   </div>
+ </div>
+ <div id="test-swipe-2" class="col s12">
+   <div class="app"></div>
+    <div class="grid">
+    <div class="grid-sizer"></div>
+    <div class="gutter-sizer"></div>
+    <a class="open">
+      <div class="grid-item gird-item--width2">
+        <img src="/assets/img/culture/osakacastletower" alt="">
+        <div class="title">오사카 성</div>
+      </div>
+    </a>
+    <div class="grid-item gird-item--width2">
+      <img src="/assets/img/culture/hikonecastle.jpg" alt="">
+      <div class="title">히코네 성</div>
+    </div>
+    <div class="grid-item gird-item--width2">
+      <img src="/assets/img/culture/Inuyamacastle.jpg" alt="">
+      <div class="title">이누야마 성</div>
+    </div>
+    <div class="grid-item grid-item--height2">
+      <img src="/assets/img/culture/tokyotower.png8" alt="">
+      <div class="title">마츠모토 성</div>
+    </div>
+    <div class="grid-item">
+      <img src="/assets/img/culture/ginkakuji.jpg" alt="">
+      <div class="title">은각사</div>
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item grid-item--height3"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item "></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height3"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+  </div>
+ </div>
+ <div id="test-swipe-3" class="col s12 green"></div>
+<script src="assets/js/masonry.js"></script>
+<script src="assets/js/backbone.modal.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('.grid').masonry({
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      gutter: 5,
+      percentPosition: true,
+    });
+    // Create a modal view class
+      var Modal = Backbone.Modal.extend({
+        template: '#modal-template',
+        cancelEl: '.bbm-button'
+      });
+      $('.open').on('click', function(){
+        var modalView = new Modal();
+        $('.app').html(modalView.render().el);
+      });
+      $('.open').click();
+});
+</script>
+<script type="text/template" id="modal-template">
+  <div class="bbm-modal__topbar">
+    <h3 class="bbm-modal__title">천수각</h3>
+  </div>
+  <div class="bbm-modal__section">
+    <p>1583년 도요토미 히데요시는 수운이 편리한 우에마치 대지에 천하쟁탈의 거점을
+          마련하기 위한 성을 축성하기로 한다.</p>
+    <p>이것이 도요토미의 오사카성이다.</p>
+    <p>1585년에 5층 8단, 검은 옻칠을 한 판자와 금박 기와, 금 장식을 붙인
+          호화로운 망루형 천수각을 완성했다.</p>
+    <p>이것으로 히데요시는 천하 권력자의 권위를 마음껏 했다.</p>
+    <p>그러나 1615년 에도막부가 도요토미를 쓰러뜨리기 위해 벌인 전쟁
+       '오사카 여름의 전투'에서 도요토미의 오사카성은 천수각과 함께 불타버린다.
+    </p>
+  </div>
+  <div class="bbm-modal__bottombar">
+    <a href="#" class="bbm-button">close</a>
+  </div>
+</script>
+</div>
