@@ -70,6 +70,7 @@ var app = app || {};
             $('.loading').show(0).delay(time).hide(0);
         }
     });
+
     views.Home = Backbone.View.extend({
       render: function(templateName) {
         var template = _.template(templateName);
@@ -94,11 +95,18 @@ var app = app || {};
     views.Culture = Backbone.View.extend({
       render: function(templateName) {
         var template = _.template(templateName);
-        this.$el.html(template);
+        this.$el.html(template({categories: this.model.category}));
         return this;
       }
     });
     views.Livingword = Backbone.View.extend({
+      render: function(templateName) {
+        var template = _.template(templateName);
+        this.$el.html(template({categories: this.model.category}));
+        return this;
+      }
+    });
+    views.Picword = Backbone.View.extend({
       render: function(templateName) {
         var template = _.template(templateName);
         this.$el.html(template({categories: this.model.category}));

@@ -9,10 +9,17 @@
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link href="assets/css/materialize.css" type="text/css" rel="stylesheet">
-    <link href="assets/css/loading.css" type="text/css" rel="stylesheet">
-
+    <link href="assets/css/materialize.css"         type="text/css" rel="stylesheet">
+    <link href="assets/css/grid.css"                type="text/css" rel="stylesheet">
+    <link href="assets/css/slick-theme.css"         type="text/css" rel="stylesheet">
+    <link href="assets/css/slick.css"               type="text/css" rel="stylesheet">
+    <link href="assets/css/loading.css"             type="text/css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min-3.3.5.css" type="text/css" rel="stylesheet">
+    <link href="assets/css/swipe.css"               type="text/css" rel="stylesheet">
     <style rel="stylesheet">
+    a {
+      text-decoration: none;
+    }
     body {
       display: flex;
       min-height: 100vh;
@@ -22,13 +29,21 @@
     main {
       flex: 1 0 auto;
     }
+    #appName {
+      height: 45px;
+    }
+    #in-header{
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
     </style>
   </head>
   <body>
     <div class="navbar-fixed ">
-      <nav>
-      <div class="nav-wrapper deep-purple accent-4">
-        <a href="" class="brand-logo" style="font-size: 18pt;">생생일본어회화 APP</a>
+      <nav id="appName">
+      <div id="in-header" class="nav-wrapper blue lighten-1">
+        <a href="" class="brand-logo" style="font-size: 18px;">생생일본어회화 APP</a>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
       </nav>
@@ -45,7 +60,7 @@
               <ul>
                 <li><a href="#/livingword">상황별 단어 청취학습</a></li>
                 <li><a href="#/countlearn">수세기 학습</a></li>
-                <li><a href="#/pictureword">그림단어 학습</a></li>
+                <li><a href="#/picword">그림단어 학습</a></li>
                 <li><a href="#/wordlearn">카타카나 학습</a></li>
                 <li><a href="#/test">모의고사</a></li>
               </ul>
@@ -54,34 +69,8 @@
         </ul>
       </li>
     </ul>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="#!">First Sidebar Link</a></li>
-      <li><a href="#!">Second Sidebar Link</a></li>
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-      <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">First</a></li>
-        <li><a href="#!">Second</a></li>
-        <li><a href="#!">Third</a></li>
-        <li><a href="#!">Fourth</a></li>
-      </ul>
-    </ul>
     <section id="main"></section>
-      <footer class="page-footer deep-purple accent-4">
-         <div class="container">
-           <div class="row">
-             <div class="col l6 s12">
-               <h5 class="white-text">일본어 회화 교육 어플리케이션</h5>
-               <p class="grey-text text-lighten-4"></p>
-             </div>
-           </div>
-         </div>
-         <div class="footer-copyright">
-           <div class="container">
-           © 2017 Copyright All reserved.
-           <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-           </div>
-         </div>
-       </footer>
+    <div></div>
     <!-- initialize JS -->
     <script src="lib/jquery-3.1.1.min.js"></script>
     <script src="lib/underscore.js"></script>
@@ -93,9 +82,12 @@
     <script src="routers/router.js" ></script>
     <script src="app.js"></script>
 
-
     <!-- extra component -->
     <script src="assets/js/materialize.min.js"></script>
     <script src="assets/js/materialize_handler.js" ></script>
+    <script src="assets/js/bootstrap-3.3.5.min.js"></script>
+    <script src="assets/js/masonry.js"></script>
+    <script src="lib/slick.min.js"></script>
+    <script src="assets/js/init.js"></script>
   </body>
 </html>

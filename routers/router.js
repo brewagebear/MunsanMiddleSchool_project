@@ -11,6 +11,9 @@ var app = app || {};
             'situation': 'situationRoute',
             'culture': 'cultureRoute',
             'livingword': 'livingwordRoute',
+            'Japcount' : 'countRoute',
+            'picword' : 'picwordRoute',
+            'katakana' : 'katakanaRoute',
             //Wildcard is placed lastline.
             '*home': 'homeRoute'
         },
@@ -123,7 +126,7 @@ var app = app || {};
                 var k = i+1;
                 listInfo.id = k;
                 var folderSrc = folderName[flages];
-                var videofileName = folderSrc+k+'.mp4';
+                var videofileName = folderSrc+'_'+k+'.mp4';
                 var imgfileName = k+'_'+'thumbnail.png';
                 listInfo.url = 'assets/videos/'+folderSrc+'/'+videofileName;
                 listInfo.imgSrc = 'assets/img/thumbnail/'+folderSrc+'/'+imgfileName;
@@ -152,12 +155,136 @@ var app = app || {};
                 view = new views.list({collection:lists});
                 this.layout.setContent(view, target);
                 this.layout.showSpinner(500);
+                console.log(jsonInfo);
               }
         },
         cultureRoute: function(){
+            /*
+             category : culture, attracting, castle, Traditional religion
+                attribute : id, title, img, modal_titel, modal_description
+            */
+            var cultureModel = {};
+            var cultureData = {};
+            var category = ['traditionalCulture', 'scenicSpot', 'traditionalReligion'];
+            var cnt = ['10', '20', '11'];
+            var title = [
+              [
+                '유도',
+                '스모',
+                '검도',
+                '합기도',
+                '의복',
+                '식생활',
+                '다도',
+                '꽃꽃이',
+                '노,분라쿠',
+                '축제'
+              ],
+              [
+                '오사카 성',
+                '히메지 성',
+                '히코네 성',
+                '마츠모토 성',
+                '이누야마 성',
+                '금각사',
+                '은각사',
+                '청수사',
+                '헤이안 신궁',
+                '메이지 신궁',
+                '후지산',
+                '츠쿠바산',
+                '핫코다산',
+                '힛코산',
+                '초카이산',
+                '시라네산',
+                '시로우마다케산',
+                '아소산',
+                '니세코산',
+                '아리아케산'
+              ],
+              [
+                '애마',
+                '오마모리',
+                '오미쿠지',
+                '테루테루보우즈',
+                '키티부적',
+                '칠복신',
+                '신사도리',
+                '데미즈야',
+                '구마데',
+                '다루마',
+                '마네기네코'
+              ]
+            ];
+            var gridSet = [
+              [],
+              [
+                'grid-item--width2',
+                '',
+                'grid-item--width2',
+                '',
+                'grid-item--width2',
+                '',
+                '',
+                'grid-item--width2',
+                '',
+                'grid-item--width2',
+                'grid-item--width2',
+                '',
+                '',
+                '',
+                '',
+                '',
+                'grid-item--width2',
+                '',
+                '',
+                ''
+              ],
+              [
+                'grid-item--width2',
+                '',
+                'grid-item--width2',
+                '',
+                'grid-item--width2',
+                '',
+                '',
+                'grid-item--width2',
+                'grid-item--height2',
+                'grid-item--width2',
+                'grid-item--width2',
+                '',
+                'grid-item--height2',
+                '',
+                ''
+              ]
+            ]
+            var categoryInfo = {};
+            var categoryArray = [];
+            var idNum = 1;
+            for (var i = 0; i < category.length; i++) {
+              for (var j = 0; j < cnt[i]; j++) {
+                var fileNum = j+1;
+                  categoryInfo.titleNum = idNum;
+                  if(i == 0){
+                    categoryInfo.imgSrc = "assets/img/culture/"+category[i]+"/"+fileNum+".png";
+                  } else {
+                    categoryInfo.imgSrc = "assets/img/culture/"+category[i]+"/"+fileNum+".jpg";
+                  }
+                  categoryInfo.gridClass = gridSet[i][j];
+                  categoryInfo.title = title[i][j];
+                  categoryArray.push(categoryInfo);
+                  categoryInfo = {};
+                  idNum ++;
+              }
+              cultureData[category[i]] = categoryArray;
+              categoryArray = [];
+            }
+            cultureModel.category = cultureData;
+            var view = new views.Culture({model:cultureModel});
             var target = 'culture';
-            var view = new views.Culture();
+            console.log(cultureData);
             this.layout.setContent(view, target);
+            this.layout.showSpinner(2500);
         },
         livingwordRoute: function(){
           //empty Model, Collection Object created.
@@ -316,12 +443,142 @@ var app = app || {};
           }
             wordList.category = wordData;
              var jsonInfo = JSON.stringify(wordList);
-             console.log(jsonInfo);
-            var view = new views.Livingword({model:wordList});
-            var target = 'livingword';
+             var view = new views.Livingword({model:wordList});
+             var target = 'livingword';
             this.layout.setContent(view, target);
             this.layout.showSpinner(2500);
-        }
+        },
+        picwordRoute: function(){
+            //empty Model, Collection Object created.
+            var wordModel = {};
+            //Parent and Child Array and Object created.
+            var wordData = {};
+            var wordList = {};
+            var categoryArray = [];
+            var categoryInfo = {};
+            //Detailed Array
+            var cnt = ['12', '12', '12', '12', '12', '12', '6'];
+            var category = ['animal', 'fish', 'bird', 'kitchen', 'apparel', 'vegetable', 'insect'];
+            var wordContent = [
+              [
+                'いぬ(개)',
+                'ねこ(고양이)',
+                'くま(곰)',
+                'ぶた(돼지)',
+                'うま(말)',
+                'うし(소)',
+                'とら(호랑이)',
+                'きつね(여우)',
+                'さる(원숭이)',
+                'うさぎ(토끼)',
+                'ぞう(코끼리)',
+                'かめ(거북이)'
+              ],
+              [
+                'かに(꽃게)',
+                'まぐろ(참치)',
+                'きんぎょ(금붕어)',
+                'たこ(문어)',
+                'いか(오징어)',
+                'えび(새우)',
+                'ひらめ(광어)',
+                'さめ(상어)',
+                'さけ(연어)',
+                'ロブスタ-(랍스타)',
+                'こい(잉어)',
+                'いわし(정어리)'
+              ],
+              [
+                'にわとり(닭)',
+                'すずめ(종달새)',
+                'からす(까마귀)',
+                'はと(비둘기)',
+                'つばめ(제비)',
+                'かもめ(기러기)',
+                'おうむ(앵무새)',
+                'わし(독수리)',
+                'だちょう(타조)',
+                'はくちょう(백조)',
+                'つる(학)'
+              ],
+              [
+                'ちゃわん(그릇)',
+                'さら(접시)',
+                'やかん(주전자)',
+                'フライパン(후라이펜)',
+                'ト-スタ-(토스터기)',
+                'ガスレンジ(가스렌지)',
+                'ほうちょう(칼)',
+                'せんざい(세제)',
+                'おたま(국자)',
+                'じゃぐち(수도꼭지)',
+                'ながしだい(싱크대)',
+                'れいぞうこ(냉장고)'
+              ],
+              [
+                'シャツ(셔츠)',
+                'ブラウス(브라우스)',
+                'ジャケット(자켓)',
+                'スカ-ト(스커트)',
+                'ズボン(바지)',
+                'はんズボン(반바지)',
+                'マフラ-(목도리)',
+                'ネクタイ(넥타이)',
+                'くつ(구두)',
+                'くつした(양말)',
+                'ハンカチ(수건)',
+                'てぶくろ(장갑)'
+              ],
+              [
+                'じゃがいも(감자)',
+                'にんじん(당근)',
+                'だいこん(무우)',
+                'しいたけ(버섯)',
+                'にんにく(양파)',
+                'ピ-マン(피망)',
+                'たまねぎ (다마네기)',
+                'きゅうり(오이)',
+                'まめ(콩)',
+                'ほうれんそう(시금치)',
+                'トマト(토마토)',
+                'かぼちゃ(호박)'
+              ],
+              [
+                'あり(개미)',
+                'くも(거미)',
+                'とんぼ(잠자리)',
+                'てんとうむし(딱정벌레)',
+                'はち(벌)',
+                'ばった(메뚜기)'
+              ]
+            ];
+            //Created Model and Collection.
+            wordModel = new this.word();
+            //Create Json as tree model.
+            var idNum = 1;
+            for (var i = 0 ; i < category.length; i++) {
+              for (var j = 0; j < cnt[i]; j++) {
+                var fileNum = j+1;
+                categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+fileNum+".mp3";
+                categoryInfo.imgSrc = "assets/img/picword/"+category[i]+"/"+category[i]+fileNum+".png";
+                categoryInfo.soundId = "sound"+idNum;
+                categoryInfo.circleId = "circle"+idNum;
+                categoryInfo.blindwordId = "blindword"+idNum;
+                categoryInfo.wordtestId = "word_test"+idNum;
+                categoryInfo.word = wordContent[i][j];
+                categoryArray.push(categoryInfo);
+                categoryInfo = {};
+                idNum ++;
+              }
+              wordData[category[i]] = categoryArray;
+              categoryArray = [];
+            }
+              wordList.category = wordData;
+               var view = new views.Picword({model:wordList});
+               var target = 'picword';
+              this.layout.setContent(view, target);
+              this.layout.showSpinner(2500);
+          }
       });
       //Create the constructor
       var router = new app.Router();
