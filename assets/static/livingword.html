@@ -1,25 +1,36 @@
 <style>
-   .mainTheme{
-     width: inherit;
-   }
-   .word_test{
-     font-weight: bold;
-     margin: auto;
-     display: none;
-   }
-   .blindword{
-     color: #ffffff;
-     margin: auto;
-     display: block;
-   }
-   .circle{
-     display: block;
-	   margin: auto;
-	   border-radius: 999px;
-     background: #000000;
-     -webkit-box-shadow: 0 -140px 20px -140px rgba(0,0,0,.3);
-     text-align: center;
-   }
+  .btnLayer{
+    display: flex;
+    height: 30px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #f9f9f9 repeat-x;
+    background-size: 3px auto;
+    z-index: 1000;
+    margin-top: 25px;
+  }
+  .btnLayer div{
+    flex: 1;
+    color: #111;
+    text-align: center;
+    background: #f1f8e9
+  }
+  .btnLayer a{
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+  }
+  .privious a{
+    background: url(assets/img/privious.png) no-repeat 50% 50%;
+    background-size: 30px;
+  }
+  .next a{
+    background: url(assets/img/next.png) no-repeat 50% 50%;
+    background-size: 30px;
+  }
 </style>
 <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css"/>
 <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
@@ -63,9 +74,12 @@
       <% } if (name == "washingmachine") { %>
         <img src="assets/img/livingword_cover/washingmachine.png" alt="세탁기표지" class="mainTheme">
       <% } %>
+      <div class="grid">
+      <div class="grid-sizer"></div>
+      <div class="gutter-sizer"></div>
       <div class="row">
       <% _.each(category, function(item, name){ %>
-          <div class="col s4" id="rows">
+          <div class="grid-item" id="rows">
             <p class="wordPlay">
             <a href="<%- item.audioSrc %>" id="<%- item.soundId%>" class="sm2_button" title="Play &quot;coins&quot;"></a>
             <%- item.wordNum %>
@@ -77,18 +91,30 @@
           </div>
       <% }) %>
       </div>
-    <div>
-      <div class="btnLayer">
-        <a class="privious_btn" id= "7" href="#/level">이전</a>
-        <a class="back_btn" href="#/level">처음으로 돌아가기</a>
+    </div>
+    <div class="btnLayer">
+      <div class="privious">
+        <a id= "7" href="#/level"></a>
       </div>
+      <div class="next"><a href="#/level"><em class="next_btn"></em></a></div>
     </div>
-    </div>
-    </div>
+  </div>
+</div>
 <% }) %>
 </div>
 </div>
-<script src="lib/slick.min.js"></script>
-<script src="assets/js/swipe.js"></script>
-<script src="assets/js/soundmanager2.js"></script>
-<script src="assets/js/mp3-player-button.js"></script>
+<div id="runScript">
+  <script src="lib/jquery-3.1.1.min.js"></script>
+  <script src="lib/slick.min.js"></script>
+  <script src="assets/js/swipe.js"></script>
+  <script src="assets/js/mp3-player-button.js"></script>
+  <script src="assets/js/masonry.js"></script>
+  <script src="assets/js/init.js"></script>
+</div>
+<script type="text/javascript">
+  var div = document.getElementById('runScript');
+  var arr = div.getElementsByTagName('script');
+  for (var n = 0; n < arr.length; n++)
+  eval(arr[n].innerHTML)//run script inside div
+  eval(initGrid());
+</script>

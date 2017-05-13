@@ -14,6 +14,7 @@ var app = app || {};
             'Japcount' : 'countRoute',
             'picword' : 'picwordRoute',
             'katakana' : 'katakanaRoute',
+            'test/:id' : 'testRoute',
             //Wildcard is placed lastline.
             '*home': 'homeRoute'
         },
@@ -576,9 +577,281 @@ var app = app || {};
               wordList.category = wordData;
                var view = new views.Picword({model:wordList});
                var target = 'picword';
+               console.log(wordList);
               this.layout.setContent(view, target);
               this.layout.showSpinner(2500);
+          },
+        katakanaRoute: function(){
+          //empty Model, Collection Object created.
+          var wordModel = {};
+          //Parent and Child Array and Object created.
+          var wordData = {};
+          var wordList = {};
+          var categoryArray = [];
+          var categoryInfo = {};
+          //Detailed Array
+          var cnt = ['12', '11', '11', '6'];
+          var category = ['fruit', 'sport', 'food', 'transportation'];
+          var wordContent = [
+            [
+              'イチゴ(딸기)',
+              'メロン(메론)',
+              'バナナ(바나나)',
+              'ナシ(배)',
+              'スイカ(수박)',
+              'リンゴ(사과)',
+              'マクワウリ(참외)',
+              'カキ(감)',
+              'ピ-チ(복숭아)',
+              'パイナップル(파인애플)',
+              'ブドウ (포도)',
+              'トマト(토마토)'
+            ],
+            [
+              'ヤキュウ(야구)',
+              'ラグビ-(럭비)',
+              'ハンドボ-ル(핸드볼)',
+              'ピンポン(탁구)',
+              'ケンドウ(검도)',
+              'アイキドウ(합기도)',
+              'バスケットボ-ル(농구)',
+              'バレ-ボ-ル (배구)',
+              'バドミントン(배드민턴)',
+              'ボクシング(복싱)',
+              'スキ- (스키)',
+              'フットボ-ル(축구)'
+            ],
+            [
+              'ウドン(우동)',
+              'ショウユラ-メン(간장라면)',
+              'カラベン(캐릭터도시락)',
+              'ソバ (메밀국수)',
+              'ミソシル(된장라면)',
+              'タイカレ-(카레)',
+              'ドンカチュラ-メン(돈까스라면)',
+              'ミソラ-メン(된장라면)',
+              'ドンカチュ(돈까스)',
+              'キンパプ(김밥)',
+              'ハンバ-ガ-(햄버거)',
+              'アイスクリ-ム (아이스크림)'
+            ],
+            [
+              'シンカンセン(신칸센)',
+              'ヒコウキ(비행기)',
+              'チカテツ(지하철)',
+              'タクシ-(택시)',
+              'トラック(트럭)',
+              'バス(버스)'
+            ]
+          ];
+          //Created Model and Collection.
+          wordModel = new this.word();
+          //Create Json as tree model.
+          var idNum = 1;
+          for (var i = 0 ; i < category.length; i++) {
+            for (var j = 0; j < cnt[i]; j++) {
+              var fileNum = j+1;
+              categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+fileNum+".mp3";
+              if(i == 2){
+                categoryInfo.imgSrc = "assets/img/katakana/"+category[i]+"/"+category[i]+fileNum+".jpg";
+              } else {
+                categoryInfo.imgSrc = "assets/img/katakana/"+category[i]+"/"+category[i]+fileNum+".png";
+              }
+              categoryInfo.soundId = "sound"+idNum;
+              categoryInfo.circleId = "circle"+idNum;
+              categoryInfo.blindwordId = "blindword"+idNum;
+              categoryInfo.wordtestId = "word_test"+idNum;
+              categoryInfo.word = wordContent[i][j];
+              categoryArray.push(categoryInfo);
+              categoryInfo = {};
+              idNum ++;
+            }
+            wordData[category[i]] = categoryArray;
+            categoryArray = [];
           }
+            wordList.category = wordData;
+             var view = new views.Picword({model:wordList});
+             var target = 'katakana';
+            this.layout.setContent(view, target);
+            this.layout.showSpinner(2500);
+            console.log(wordList);
+        },
+        countRoute: function(){
+          var view = new views.Count();
+          var target = 'home';
+          this.layout.setContent(view, target);
+        },
+        testRoute: function(){
+          var url = Backbone.history.getFragment();
+          var view = {};
+          var lists = {};
+          var flag = 0;
+          var urlLength = ['test/1', 'test/2'];
+          var target = 'test';
+          var matterCollection = {};
+          switch (url) {
+            case 'test/1':
+                flag = 1;
+              break;
+            case 'test/2':
+                flag = 2;
+              break;
+            default:
+                flag = 3;
+              break;
+          }
+
+          var isEmpty = function(value){
+            if( value == "" ||
+                value == null ||
+                value == undefined ||
+                ( value != null && typeof value == "object" && !Object.keys(value).length)){
+                return true
+                } else {
+                return false
+              }
+          }
+
+          var createTestViewpages = function(flag){
+            var listArray = {};
+            var listTemp = [];
+            var listInfo = {};
+            var testTitle = [
+              ['확인학습'],
+              ['형성평가']
+            ];
+            var testBlindDescription = [
+              [
+                '1. はじめまして｡イユリです｡',
+                '2. わたしは のだ めぐみです。',
+                '3. こちらこそ｡よろしくおねがいします｡'
+              ],
+              [
+                '1. わたしは かいしゃいんです。',
+                '2. あなたは がくせいですか。',
+                '3. いしださんは モデルですか。'
+              ],
+              [
+                '1. これはりんきょうですか。',
+                '2. わたししのテジカメでは ありません。',
+                '3. あれはひこうきです。'
+              ],
+              [
+                '1. ともだちのよしのです。',
+                '2. この しゃしんのひとは だれですか。'
+              ],
+              [
+                'A: ささきさん､うちは どこですか｡',
+                'B: シンチョンです。'
+              ],
+              [
+                'A: はこの なかに なにが ありますか。',
+                'B: なにも ありません。'
+              ],
+              [
+                '1. このビールは つめたくないです｡',
+                '2. へやは せまくてくらいです｡'
+              ],
+              [
+                '1. かのじょは きれいな ひとです｡',
+                '2. かれは まじめでは ありません｡',
+                '3. あそこはとてもまじめなレストランです。'
+              ],
+              [
+                '1. ドアを あけますか｡',
+                '2. あさごはんを たべます｡',
+                '3. よる はやく ねません｡'
+              ],
+              [
+                '1. かんこくごを おしえます｡',
+                '2. かいしゃの まえで バスを おりますか｡',
+              ]
+            ];
+            var testShowAnswer = [
+              [
+                '1. 처음 뵙겠습니다. 이유리입니다.',
+                '2. 저는 노다 메구미 입니다.',
+                '3. 이쪽이야말로 잘 부탁드립니다. '
+              ],
+              [
+                '1. 저는 회사원입니다.',
+                '2. 당신은 학생입니까?',
+                '3. 이시다는 모델입니까?'
+              ],
+              [
+                '1. 이것은 인형입니까?.',
+                '2. 제 디카가 아니에요.',
+                '3. 저것은 비행기입니다.'
+              ],
+              [
+                'A: 친구인 요시노입니다.',
+                'B: 이 사진에 있는 사람은 누구입니까?'
+              ],
+              [
+                'A: 사사키씨 집은 어디입니까?',
+                'B: 신촌입니다.'
+              ],
+              [
+                'A: 상자 속에 무엇이 있습니까?',
+                'B: 아무것도 없습니다.'
+              ],
+              [
+                '1. 이 맥주는 차갑지 않습니다.',
+                '2. 방은 좁고 어둡습니다.'
+              ],
+              [
+                '1. 그녀는 예쁜 사람이에요.',
+                '2. 그는 성실하지 않습니다.',
+                '3. 저곳은 굉장히 유명한 레스토랑이에요.'
+              ],
+              [
+                '1. 문을 열까요?',
+                '2. 아침밥을 먹습니다.',
+                '3. 밤에 일찍 자지 않아요.'
+              ],
+              [
+                '1. 한국어를 가르칩니다.',
+                '2. 회사 앞에서 버스를 내립니까?'
+              ]
+            ];
+            var folderSrc = 'assets/img/test';
+
+              //var imgfileName = k+'_'+'test.png';
+              //listInfo.imgSrc = folderSrc+imgfileName;
+
+              for (var i = 0; i <= 9; i++) {
+                for (var j = 0; j <= 2; j++) {
+                  if(isEmpty(testShowAnswer[i][j])){
+                  } else {
+                    listInfo.answer = testShowAnswer[i][j]; //i = 3까지 돌아야함.
+                    listInfo.description = testBlindDescription[i][j];
+                    listTemp.push(listInfo);
+                    listInfo = {};
+                  }
+                }
+              }
+              listInfo.title = testTitle[0][1];
+              listInfo.category = '확인학습';
+              listInfo.categoryNum = '/#/list/'+flag;
+              listInfo.QnA = listTemp;
+              listArray['content'] = listInfo;
+
+              return listArray;
+              console.log(matterCollection);
+            }
+          if(jQuery.inArray(url, urlLength) == -1){
+            this.layout.setContent(view, target);
+            this.layout.showSpinner(300);
+          } else {
+            matterCollection = createTestViewpages(flag);
+            //var jsoninfo = JSON.stringify(matterCollection);
+            console.log(matterCollection);
+            view = new views.Test({model:matterCollection});
+
+            this.layout.setContent(view, target);
+            this.layout.showSpinner(500);
+          }
+        }
       });
       //Create the constructor
       var router = new app.Router();

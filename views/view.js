@@ -113,4 +113,25 @@ var app = app || {};
         return this;
       }
     });
+    views.Count = Backbone.View.extend({
+      render: function(templateName) {
+        var template = _.template(templateName);
+        this.$el.html(template({categories: this.model.category}));
+        return this;
+      }
+    });
+    views.Katakana = Backbone.View.extend({
+      render: function(templateName) {
+        var template = _.template(templateName);
+        this.$el.html(template({categories: this.model.category}));
+        return this;
+      }
+    });
+    views.Test = Backbone.View.extend({
+      render: function(templateName) {
+        this.template = _.template(templateName);
+        this.$el.html(this.template({content : this.model.content}));
+        return this;
+      }
+    });
 })();

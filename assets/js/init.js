@@ -14,7 +14,7 @@
     $('.grid').masonry({
       itemSelector: '.grid-main-item',
       columnWidth: '.grid-main-sizer',
-      gutter: 5,
+      gutter: 15,
       percentPosition: true,
     });
   }

@@ -1,15 +1,30 @@
 <div class="content">
   <div class="single-items">
-    <div><img src="assets/img/thumbnail/call/1_thumbnail.png" alt="">
+    <div>
+      <a href="/assets/videos/main/clinic.mp4">
+        <img src="assets/img/main_cover/thumbnail_clinic.png" alt="">
+      </a>
     </div>
     <div>
-      <img src="assets/img/thumbnail/call/2_thumbnail.png" alt="">
+      <img src="assets/img/main_cover/thumbnail_hotel.png" alt="">
     </div>
     <div>
-      <img src="assets/img/thumbnail/call/3_thumbnail.png" alt="">
+      <img src="assets/img/main_cover/thumbnail_restaurant.png" alt="">
     </div>
     <div>
-      <img src="assets/img/thumbnail/call/4_thumbnail.png" alt="">
+      <img src="assets/img/main_cover/thumbnail_shopping.png" alt="">
+    </div>
+    <div>
+      <img src="assets/img/main_cover/thumbnail_sport.png" alt="">
+    </div>
+    <div>
+      <img src="assets/img/main_cover/thumbnail_telephone.png" alt="">
+    </div>
+    <div>
+      <img src="assets/img/main_cover/thumbnail_tour.png" alt="">
+    </div>
+    <div>
+      <img src="assets/img/main_cover/thumbnail_traffic.png" alt="">
     </div>
   </div>
 <div class="grid">
@@ -52,9 +67,11 @@
     </div>
   </div>
 </div>
+<script src="lib/jquery-3.1.1.min.js"></script>
+<script src="lib/slick.min.js"></script>
+<script src="assets/js/masonry.js"></script>
+<script src="assets/js/init.js"></script>
 <script type="text/javascript">
-jQuery(function($) {
-  initMainGrid();
-  initSlider();
-})(jQuery);
+  eval(initMainGrid());
+  eval(initSlider());
 </script>
