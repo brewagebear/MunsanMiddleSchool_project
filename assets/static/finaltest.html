@@ -1,0 +1,54 @@
+<style>
+.progress-box { margin-bottom:5px; background-color:#fff; border:1px solid transparent; border-radius:4px 4px 0 0; -webkit-box-shadow:0 1px 1px rgba(0,0,0,.05); box-shadow:0 1px 1px rgba(0,0,0,.05); } .progress-box-default { border-color:#ddd; } .progress-heading { padding:7px 15px 5px; border-bottom:1px solid transparent; background-color:#f5f5f5; border-top-right-radius:3px; border-top-left-radius:3px; } .progress-small { overflow:hidden; height:7px ;margin-bottom:0px; background-color:#f5f5f5; border-radius:0px; -webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1); box-shadow:inset 0 1px 2px rgba(0,0,0,.1); } .progress-bar-small { float:left; width:0;height:100%; font-size:6px;line-height:7px; color:#fff; text-align:center; background-color:#428bca; -webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.15); box-shadow:inset 0 -1px 0 rgba(0,0,0,.15); -webkit-transition:width .6s ease; transition:width .6s ease; } .progress-bar-s-danger {background-color:#d9534f;} .progress-bar-s-info {background-color:#5bc0de;} .progress-bar-s-warning {background-color:#f0ad4e;} .progress-bar-s-success {background-color:#5cb85c;} .progress-bar-s-grey{background-color:#6a737a}
+.answerSection{
+  display: none;
+}
+.highlight {
+  background:#64B5F6;
+}
+</style>
+<!-- <DIV class="progress-box progress-box-default">
+     <DIV class=progress-heading>확인평가 진행률 : 10%</DIV>
+      <DIV class=progress-small>
+            <DIV role=progressbar aria-valuenow=10 aria-valuemin=0 class="progress-bar-small progress-bar-s-info" style="WIDTH: 10%" aria-valuemax=100>
+                   <SPAN class=sr-only>60% Complete</SPAN>
+             </DIV>
+       </DIV>
+</DIV> -->
+<div class="loading">Loading&#8230;</div>
+<div class="content">
+<div class="navBar blue lighten-2">
+<nav class="breadcrumb-nav">
+   <div class="nav-wrapper">
+     <div class="col s12 breadcrumb-content">
+       <a href="#/test/0" class="breadcrumb">최종평가</a>
+     </div>
+   </div>
+</nav>
+</div>
+<div class="content">
+  <div class="grid">
+  <div class="grid-sizer"></div>
+  <div class="gutter-sizer"></div>
+  <div class="grid-item grid-item--width">
+    <h4>한글 해석이 무엇일까요? (일본어를 클릭해보세요)</h4>
+  </div>
+  <% _.each(content, function(matters, name){ %>
+    <% _.each(matters, function(item, name){ %>
+      <% if (item.constructor == Object) { %>
+        <div class="grid-item grid-item--width">
+            <div class="testSection">
+              <a id="testWord" class="waves-effect waves-light btn"><p class="testWord"><%- item.description %></p><p class="answerSection"><%- item.answer%></p></a>
+            </div>
+          </div>
+          <% } %>
+      <% }) %>
+    <% }) %>
+  </div>
+</div>
+  <script src="lib/slick.min.js"></script>
+  <script src="assets/js/pixeldraw.js"></script>
+  <script type="text/javascript">
+    PixelDraw.load('masonry', 'swipe', 'init');
+    eval(initGrid());
+  </script>

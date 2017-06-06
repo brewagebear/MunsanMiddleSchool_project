@@ -9,5 +9,7 @@ var app = {
     Culture : {},
     Livingword : {},
   },
-  View: {}
+  View: {},
+  SoundManager: {},
+  soundManager: {}
 }

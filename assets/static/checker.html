@@ -1,0 +1,107 @@
+<style>
+  .btnLayer{
+    display: flex;
+    height: 30px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #f9f9f9 repeat-x;
+    background-size: 3px auto;
+    z-index: 1000;
+    margin-top: 25px;
+  }
+  .btnLayer div{
+    flex: 1;
+    color: #111;
+    text-align: center;
+    background: #f1f8e9
+  }
+  .btnLayer a{
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+  }
+  .privious a{
+    background: url(assets/img/privious.png) no-repeat 50% 50%;
+    background-size: 30px;
+  }
+  .next a{
+    background: url(assets/img/next.png) no-repeat 50% 50%;
+    background-size: 30px;
+  }
+  .answerSection {
+    margin: auto;
+  }
+</style>
+<link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
+<link rel="stylesheet" type="text/css" href="assets/css/swipe.css"/>
+<link rel="stylesheet" type="text/css" href="assets/css/mp3-player-button.css">
+<div class="loading">Loading&#8230;</div>
+<div class="sub-header">
+  <div class="swipe-tabs">
+    <div class="swipe-tab">확인학습 1</div>
+    <div class="swipe-tab">확인학습 2</div>
+    <div class="swipe-tab">확인학습 3</div>
+    <div class="swipe-tab">확인학습 4</div>
+    <div class="swipe-tab">확인학습 5</div>
+    <div class="swipe-tab">확인학습 6</div>
+  </div>
+</div>
+<div class="main-container">
+  <div class="swipe-tabs-container ">
+    <% _.each(categories, function(category, name){ %>
+    <div class="swipe-tab-content">
+      <div class="slide_content">
+        <% if (name == "checker1") { %>
+        <img src="assets/img/checker/checker1.png" alt="침실표지" class="mainTheme">
+        <h4>1. 다음 장면에서 할 수 있는 인사말을 모두 골라 쓰시오.</h4><br /><h5>정답확인</h5>
+        <% } if (name == "checker2")  { %>
+        <img src="assets/img/checker/checker2.png" alt="싱크대표지" class="mainTheme">
+        <h4>2. 다음 장면에서 말풍선에 들어갈 표현은?</h4><br /><h5>정답확인</h5>
+        <% } if (name == "checker3")  { %>
+        <img src="assets/img/checker/checker3.png" alt="책상표지" class="mainTheme">
+        <h4>3. 다음 말풍선에 물음에 대답으로 옳은 것을 답하시오.</h4><br /><h5>정답확인</h5>
+        <% } if (name == "checker4") {  %>
+        <img src="assets/img/checker/checker4.png" alt="아침표지" class="mainTheme">
+        <h4>4. 다음 말풍선에 물음에 대답으로 옳은 것을 답하시오.</h4><br /><h5>정답확인</h5>
+        <% } if (name == "checker5") { %>
+        <img src="assets/img/checker/checker5.png" alt="목욕탕표지" class="mainTheme">
+        <h4>5. 짝과 함께 감사표현을 답하시오.</h4><br /><h4>정답확인</h4>
+        <% } if (name == "checker6") { %>
+        <img src="assets/img/checker/checker6.png" alt="세탁기표지" class="mainTheme">
+        <h4>6. 식사 때 하는 인사 표현으로 말풍선에 들어갈 표현은?</h4><br /><h5>정답확인</h5>
+        <% } %>
+        <div class="grid">
+          <div class="grid-main-sizer"></div>
+          <div class="gutter-sizer"></div>
+          <div class="row">
+            <% _.each(category, function(item, name){ %>
+            <div class="grid-main-item" id="rows">
+              <p class="wordPlay">
+                <%- item.wordNum %>
+              </p>
+              <a id="testWord" class="waves-effect waves-light btn"><p class="testWord"><%- item.description %></p><p class="answerSection"><%- item.answer%></p></a>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+        <div class="btnLayer">
+          <div class="privious">
+            <a id= "7" href="#/level"></a>
+          </div>
+          <div class="next"><a href="#/level"><em class="next_btn"></em></a></div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+<script src="lib/slick.min.js"></script>
+<script src="assets/js/pixeldraw.js"></script>
+<script type="text/javascript">
+  PixelDraw.load('masonry', 'swipe', 'init', 'mp3-player-button', 'soundmanager2');
+  eval(initMainGrid());
+</script>

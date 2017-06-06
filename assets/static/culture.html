@@ -1,3 +1,5 @@
+<link href="assets/css/bootstrap.modal-bs3patch.css" type="text/css" rel="stylesheet">
+<link href="assets/css/bootstrap.modal.css" type="text/css" rel="stylesheet">
 <div class="sub-header">
   <div class="swipe-tabs">
     <div class="swipe-tab">일본문화</div>
@@ -15,10 +17,14 @@
         <% if (name == "traditionalCulture") { %>
           <% _.each(category, function(item, name){ %>
               <div>
-                <a class="open" id="title<%- item.titleNum%>">
+                <a class="open_culture" id="title<%- item.titleNum%>">
                   <div class="grid-item grid-item--thumbList <%- item.gridClass%>">
                     <img src=<%- item.imgSrc%>>
-                    <div class="title"><%- item.title%></div>
+                    <% if (item.gridClass == 'grid-item--height3') { %>
+                      <div class="title title-revised"><%- item.title %></div>
+                    <% } else { %>
+                      <div class="title"><%- item.title %></div>
+                    <% } %>
                   </div>
                 </a>
               </div>
@@ -73,31 +79,44 @@
     </div>
   </div>
 </div>
-<script src="lib/jquery-3.1.1.min.js"></script>
-<script src="lib/slick.min.js"></script>
-<script src="assets/js/swipe.js"></script>
-<script src="assets/js/soundmanager2.js"></script>
-<script src="assets/js/mp3-player-button.js"></script>
-<script src="assets/js/masonry.js"></script>
-<script src="assets/js/init.js"></script>
-<script type="text/javascript">
-  eval(initGrid());
-</script>
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="title"></h4>
-        </div>
-        <div class="modal-body">
-          <p id="content"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="defaultModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="title"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="content"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>
     </div>
   </div>
+</div>
+<!-- longModal -->
+<div class="modal fade" id="longModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="longModalTitle"></h4>
+      </div>
+      <div class="modal-body" id="longModalContent"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="lib/slick.min.js"></script>
+<script src="assets/js/bootstrap-3.3.5.min.js"></script>
+<!-- <script src="assets/js/bootstrap-modalmanager.js"></script> -->
+<script src="assets/js/pixeldraw.js"></script>
+<script type="text/javascript">
+  PixelDraw.load('masonry', 'swipe', 'init');
+  eval(initGrid());
+</script>

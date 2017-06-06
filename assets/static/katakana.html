@@ -43,18 +43,9 @@
     </div>
   <% }) %>
 </div>
-<div id="runScript">
-  <script src="lib/jquery-3.1.1.min.js"></script>
   <script src="lib/slick.min.js"></script>
-  <script src="assets/js/swipe.js"></script>
-  <script src="assets/js/mp3-player-button.js"></script>
-  <script src="assets/js/masonry.js"></script>
-  <script src="assets/js/init.js"></script>
-</div>
-<script type="text/javascript">
-  var div = document.getElementById('runScript');
-  var arr = div.getElementsByTagName('script');
-  for (var n = 0; n < arr.length; n++)
-  eval(arr[n].innerHTML)//run script inside div
-  eval(initGrid());
-</script>
+  <script src="assets/js/pixeldraw.js"></script>
+  <script type="text/javascript">
+    PixelDraw.load('masonry', 'swipe', 'init', 'mp3-player-button', 'soundmanager2');
+    eval(initGrid());
+  </script>

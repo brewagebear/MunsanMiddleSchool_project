@@ -11,7 +11,7 @@ var app = app || {};
             'situation': 'situationRoute',
             'culture': 'cultureRoute',
             'livingword': 'livingwordRoute',
-            'Japcount' : 'countRoute',
+            'count' : 'countRoute',
             'picword' : 'picwordRoute',
             'katakana' : 'katakanaRoute',
             'test/:id' : 'testRoute',
@@ -42,122 +42,137 @@ var app = app || {};
             var target = 'home';
             this.layout.setContent(view, target);
         },
-        situationRoute: function() {
-          var view = new views.Situation();
-          var target = 'situation';
-          this.layout.setContent(view, target);
-        },
         listRoute: function() {
-            var url = Backbone.history.getFragment();
-            var view = {};
-            var lists = {};
-            var target = 'list';
-            var createListFlag = 0;
-            var categoryNum = 0;
-            var categoryName = ['전화', '저녁', '기타표현', '병원', '생생일본어', '쇼핑', '스포츠', '관광', '교통'];
-            var urlLength = ['list/1', 'list/2', 'list/3', 'list/4', 'list/5', 'list/6', 'list/7', 'list/8', 'list/9', 'list/10']
-            var jsonInfo;
+          var url = Backbone.history.getFragment();
+          var view = {};
+          var lists = {};
+          var target = 'list';
+          var createListFlag = 0;
+          var categoryNum = 0;
+          var categoryName = ['전화', '저녁', '기타표현', '병원', '생생일본어', '쇼핑', '스포츠', '관광', '교통', '학생실습'];
+          var urlLength = ['list/1', 'list/2', 'list/3', 'list/4', 'list/5', 'list/6', 'list/7', 'list/8', 'list/9', 'list/10']
+          var jsonInfo;
 
-            switch (url) {
-              case 'list/1':
-               	  createListFlag = 0;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[0];
-                  break;
-              case 'list/2':
-                  createListFlag = 1;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[1];
-                  break;
-              case 'list/3':
-                  createListFlag = 2;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[2];
-                  break;
-              case 'list/4':
-                  createListFlag = 3;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[3];
-                  break;
-              case 'list/5':
-                  createListFlag = 4;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[4];
-                  break;
-              case 'list/6':
-                  createListFlag = 5;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[5];
-                  break;
-              case 'list/7':
-                  createListFlag = 6;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[6];
-                  break;
-              case 'list/8':
-                  createListFlag = 7;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[7];
-                  break;
-              case 'list/9':
-                  createListFlag = 8;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[8];
-                  break;
-              case 'list/10':
-                  createListFlag = 9;
-                  categoryNum = createListFlag+1;
-                  categoryName = categoryName[9];
-                  break;
-              default:
+          switch (url) {
+            case 'list/1':
+                createListFlag = 0;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[0];
                 break;
+            case 'list/2':
+                createListFlag = 1;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[1];
+                break;
+            case 'list/3':
+                createListFlag = 2;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[2];
+                break;
+            case 'list/4':
+                createListFlag = 3;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[3];
+                break;
+            case 'list/5':
+                createListFlag = 4;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[4];
+                break;
+            case 'list/6':
+                createListFlag = 5;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[5];
+                break;
+            case 'list/7':
+                createListFlag = 6;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[6];
+                break;
+            case 'list/8':
+                createListFlag = 7;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[7];
+                break;
+            case 'list/9':
+                createListFlag = 8;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[8];
+                break;
+            case 'list/10':
+                createListFlag = 9;
+                categoryNum = createListFlag+1;
+                categoryName = categoryName[9];
+                break;
+            default:
+              break;
+          }
+
+          var generateList = function(flages, categoryName, categoryNum){
+            var listArray = new Array();
+            var listInfo = new Object();
+            var listLength = ['4', '5', '4', '9', '6', '5', '5', '6', '5', '7'];
+            var folderName = ['call', 'diner', 'etc', 'hospital', 'livejapanese', 'shopping', 'sport', 'tour', 'traffic', 'main'];
+            var description = ['회화 인트로 동영상', '회화동영상'];
+
+            listInfo.category = categoryName;
+            listInfo.categoryNum = '/#/list/'+categoryNum;
+
+            for (var i = 0; i < listLength[flages]; i++) {
+              var k = i+1;
+              listInfo.id = k;
+              var folderSrc = folderName[flages];
+              var videofileName = '';
+              var imgfileName = '';
+
+              if(folderSrc == 'main'){
+                  var mainVideoThumbName = ['clinic', 'hotel', 'restaurant', 'shopping', 'sport', 'telephone', 'tour', 'traffic'];
+                  videofileName = mainVideoThumbName[k]+'.mp4';
+                  imgfileName = 'thumbnail'+'_'+mainVideoThumbName[k]+'.png';
+                  listInfo.imgSrc = 'assets/img/main_cover/'+imgfileName;
+                  listInfo.url = 'assets/videos/main/'+videofileName;
+              } else {
+                  videofileName = folderSrc+'_'+k+'.mp4';
+                  imgfileName = k+'_'+'thumbnail.png';
+                  listInfo.imgSrc = 'assets/img/thumbnail/'+folderSrc+'/'+imgfileName;
+                  listInfo.url = 'assets/videos/'+folderSrc+'/'+videofileName;
+              }
+              if(folderSrc == "main"){
+                  var titleNum = i+1;
+                  listInfo.title = categoryName+' '+description[1]+titleNum;
+              } else if(i == 0){
+                  listInfo.title = categoryName+' '+description[0];
+                } else {
+                  listInfo.title = categoryName+' '+description[1]+i;
+                }
+                listArray.push(listInfo);
+                listInfo = new Object();
+              }
+              jsonInfo = listArray;
+              return jsonInfo;
             }
 
-            var generateList = function(flages, categoryName, categoryNum){
-              var listArray = new Array();
-              var listInfo = new Object();
-              var listLength = ['4', '5', '4', '9', '6', '5', '5', '6', '5', '5'];
-              var folderName = ['call', 'diner', 'etc', 'hospital', 'livejapanese', 'shopping', 'sport', 'tour', 'traffic'];
-              var description = ['회화 인트로 동영상', '회화동영상'];
-
-              listInfo.category = categoryName;
-              listInfo.categoryNum = '/#/list/'+categoryNum;
-
-              for (var i = 0; i < listLength[flages]; i++) {
-                var k = i+1;
-                listInfo.id = k;
-                var folderSrc = folderName[flages];
-                var videofileName = folderSrc+'_'+k+'.mp4';
-                var imgfileName = k+'_'+'thumbnail.png';
-                listInfo.url = 'assets/videos/'+folderSrc+'/'+videofileName;
-                listInfo.imgSrc = 'assets/img/thumbnail/'+folderSrc+'/'+imgfileName;
-                  if(i == 0){
-                    listInfo.title = categoryName+' '+description[0];
-                  } else {
-                    listInfo.title = categoryName+' '+description[1]+i;
-                  }
-                  listArray.push(listInfo);
-                  listInfo = new Object();
-                }
-                jsonInfo = listArray;
-                return jsonInfo;
-              }
-
-              if(jQuery.inArray(url, urlLength) == -1){
-                target = 'videoTotalList';
-                lists = new this.lists();
-                view = new views.list({collection:lists});
-                this.layout.setContent(view, target);
-                this.layout.showSpinner(300);
-              } else {
-                jsonInfo = generateList(createListFlag, categoryName, categoryNum);
-                lists = new this.lists();
-                lists.add(jsonInfo);
-                view = new views.list({collection:lists});
-                this.layout.setContent(view, target);
-                this.layout.showSpinner(500);
-                console.log(jsonInfo);
-              }
+            if(jQuery.inArray(url, urlLength) == -1 || jQuery.inArray(url, urlLength) < 0){
+              target = 'videoTotalList';
+              lists = new this.lists();
+              view = new views.list({collection:lists});
+              this.layout.setContent(view, target);
+              this.layout.showSpinner(300);
+            } else if (jQuery.inArray(url, urlLength) == 8){
+              jsonInfo = generateList(createListFlag, categoryName, categoryNum);
+              lists = new this.lists();
+              lists.add(jsonInfo);
+              view = new views.list({collection:lists});
+              this.layout.setContent(view, target);
+              this.layout.showSpinner(300);
+            } else {
+              jsonInfo = generateList(createListFlag, categoryName, categoryNum);
+              lists = new this.lists();
+              lists.add(jsonInfo);
+              view = new views.list({collection:lists});
+              this.layout.setContent(view, target);
+              this.layout.showSpinner(500);
+            }
         },
         cultureRoute: function(){
             /*
@@ -167,7 +182,7 @@ var app = app || {};
             var cultureModel = {};
             var cultureData = {};
             var category = ['traditionalCulture', 'scenicSpot', 'traditionalReligion'];
-            var cnt = ['10', '20', '11'];
+            var cnt = ['9', '20', '11'];
             var title = [
               [
                 '유도',
@@ -178,7 +193,6 @@ var app = app || {};
                 '식생활',
                 '다도',
                 '꽃꽃이',
-                '노,분라쿠',
                 '축제'
               ],
               [
@@ -218,7 +232,13 @@ var app = app || {};
               ]
             ];
             var gridSet = [
-              [],
+              [
+                'grid-item--height3',
+                'grid-item--height2',
+                'grid-item--height2',
+                'grid-item--height3',
+                'grid-item--height2'
+              ],
               [
                 'grid-item--width2',
                 '',
@@ -427,7 +447,6 @@ var app = app || {};
           for (var i = 0 ; i < category.length; i++) {
             for (var j = 0; j < cnt[i]; j++) {
               var fileNum = j+1;
-              console.log(idNum);
               categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+"_"+fileNum+".mp3";
               categoryInfo.soundId = "sound"+idNum;
               categoryInfo.wordNum = number[fileNum];
@@ -447,7 +466,8 @@ var app = app || {};
              var view = new views.Livingword({model:wordList});
              var target = 'livingword';
             this.layout.setContent(view, target);
-            this.layout.showSpinner(2500);
+            this.layout.showSpinner(1500);
+            this.layout.resetSoundManager();
         },
         picwordRoute: function(){
             //empty Model, Collection Object created.
@@ -496,11 +516,12 @@ var app = app || {};
                 'はと(비둘기)',
                 'つばめ(제비)',
                 'かもめ(기러기)',
-                'おうむ(앵무새)',
+                'ペンギン(펭귄)',
                 'わし(독수리)',
                 'だちょう(타조)',
                 'はくちょう(백조)',
-                'つる(학)'
+                'つる(학)',
+                'おうむ(앵무새)'
               ],
               [
                 'ちゃわん(그릇)',
@@ -527,8 +548,8 @@ var app = app || {};
                 'ネクタイ(넥타이)',
                 'くつ(구두)',
                 'くつした(양말)',
-                'ハンカチ(수건)',
-                'てぶくろ(장갑)'
+                'てぶくろ(장갑)',
+                'ハンカチ(수건)'
               ],
               [
                 'じゃがいも(감자)',
@@ -577,9 +598,9 @@ var app = app || {};
               wordList.category = wordData;
                var view = new views.Picword({model:wordList});
                var target = 'picword';
-               console.log(wordList);
               this.layout.setContent(view, target);
-              this.layout.showSpinner(2500);
+              this.layout.showSpinner(1500);
+              this.layout.resetSoundManager();
           },
         katakanaRoute: function(){
           //empty Model, Collection Object created.
@@ -590,7 +611,7 @@ var app = app || {};
           var categoryArray = [];
           var categoryInfo = {};
           //Detailed Array
-          var cnt = ['12', '11', '11', '6'];
+          var cnt = ['12', '12', '12', '6'];
           var category = ['fruit', 'sport', 'food', 'transportation'];
           var wordContent = [
             [
@@ -673,13 +694,229 @@ var app = app || {};
              var view = new views.Picword({model:wordList});
              var target = 'katakana';
             this.layout.setContent(view, target);
-            this.layout.showSpinner(2500);
-            console.log(wordList);
+            this.layout.showSpinner(1500);
+            this.layout.resetSoundManager();
         },
         countRoute: function(){
-          var view = new views.Count();
-          var target = 'home';
-          this.layout.setContent(view, target);
+          //empty Model, Collection Object created.
+          var wordModel = {};
+          //Parent and Child Array and Object created.
+          var wordData = {};
+          var wordList = {};
+          var categoryArray = [];
+          var categoryInfo = {};
+          //Detailed Array
+          var cnt = ['15', '15', '5', '20'];
+          var category = ['number_cnt', 'minute_cnt', 'price_cnt', 'peopleAnditem_cnt'];
+          var divNumber_cntKOR = [
+            '200',
+            '500',
+            '800',
+            '2,000',
+            '8,000',
+            '300',
+            '600',
+            '900',
+            '3,000',
+            '10,000',
+            '400',
+            '700',
+            '1,000',
+            '6,000',
+            '100,000,000'
+          ];
+          var divNumber_cntJPN = [
+            'にひゃく',
+            'ごひゃく',
+            'はっぴゃく',
+            'にせん',
+            'はっせん',
+            'さんびゃく',
+            'ろっびゃく',
+            'きゅうひゃく',
+            'さんぜん',
+            'いちまん',
+            'よんひゃく',
+            'ななひゃく',
+            'せん',
+            'ろくせん',
+            'いちおく'
+          ];
+          var showKor = [
+            [
+              '1',
+              '2',
+              '3',
+              '4',
+              '5',
+              '6',
+              '7',
+              '8',
+              '9',
+              '10',
+              '14',
+              '17',
+              '19',
+              '20',
+              '100',
+            ],
+            [
+              '1분',
+              '2분',
+              '3분',
+              '4분',
+              '5분',
+              '6분',
+              '7분',
+              '8분',
+              '9분',
+              '10분',
+              '11분',
+              '12분',
+              '15분',
+              '20분',
+              '30분'
+            ],
+            [
+              '350￥',
+              '260￥',
+              '420￥',
+              '120￥',
+              '150￥'
+            ],
+            [
+              '1명',
+              '2명',
+              '3명',
+              '4명',
+              '5명',
+              '6명',
+              '7명',
+              '8명',
+              '9명',
+              '10명',
+              '하나',
+              '둘',
+              '셋',
+              '넷',
+              '다섯',
+              '여섯',
+              '일곱',
+              '여덟',
+              '아홉',
+              '여덟',
+              '아홉',
+              '열'
+            ]
+          ];
+          var showJpn = [
+            [
+              'いち',
+              'に',
+              'さん',
+              'し/よん',
+              'ご',
+              'ろく',
+              'しち/なな',
+              'はち',
+              'きゅう/く',
+              'じゅう',
+              'じゅうよん',
+              'じゅうなな/しち',
+              'じゅうきゅう',
+              'にじゅう',
+              'ひゃく',
+            ],
+            [
+              'いっぷん',
+              'にふん',
+              'さんぷん',
+              'よんぷん',
+              'ごふん',
+              'ろっぷん',
+              'ななふん',
+              'はっぷん',
+              'きゅうふん',
+              'じゅっぷん',
+              'じゅういっぷん',
+              'じゅうにふん',
+              'じゅうごふん',
+              'にじゅっぷん',
+              'さんじゅっぷん'
+            ],
+            [
+              'さんびゃくごじゅうえん',
+              'にひゃくろくじゅうえん',
+              'よんひゃくにじゃうえん',
+              'ひゃくにじゅうえん',
+              'びゃくごじゅえん'
+            ],
+            [
+              'ひとり',
+              'ふたり',
+              'さんにん',
+              'よにん',
+              'ごにん',
+              'ろくにん',
+              'ななにん',
+              'はちにん',
+              'きゅうにん',
+              'じゅうにん',
+              'ひとつ',
+              'ふたつ',
+              'みっつ',
+              'よっつ',
+              'いつつ',
+              'むっつ',
+              'ななつ',
+              'やっつ',
+              'ここのつ',
+              'やっつ',
+              'ここのつ',
+              'とお'
+            ]
+          ];
+          //Created Model and Collection.
+          wordModel = new this.word();
+          //Create Json as tree model.
+          var idNum = 1;
+          for (var i = 0 ; i < category.length; i++) {
+            for (var j = 0; j < cnt[i]; j++) {
+              var fileNum = j+1;
+              categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+fileNum+".mp3";
+              if(i == 2){
+                categoryInfo.imgSrc = "assets/img/katakana/"+category[i]+"/"+category[i]+fileNum+".jpg";
+              } else {
+                categoryInfo.imgSrc = "assets/img/katakana/"+category[i]+"/"+category[i]+fileNum+".png";
+              }
+              categoryInfo.soundId = "sound"+idNum;
+              categoryInfo.circleId = "circle"+idNum;
+              categoryInfo.blindwordId = "blindword"+idNum;
+              categoryInfo.wordtestId = "word_test"+idNum;
+              if(i == 0) {
+                categoryInfo.kor = showKor[i][j];
+                categoryInfo.jpn = showJpn[i][j];
+                categoryInfo.kor2 = divNumber_cntKOR[j];
+                categoryInfo.jpn2 = divNumber_cntJPN[j];
+                categoryArray.push(categoryInfo);
+              } else {
+                categoryInfo.kor = showKor[i][j];
+                categoryInfo.jpn = showJpn[i][j];
+                categoryArray.push(categoryInfo);
+              }
+              categoryInfo = {};
+              idNum ++;
+            }
+            wordData[category[i]] = categoryArray;
+            categoryArray = [];
+          }
+            wordList.category = wordData;
+            console.log(wordList);
+             var view = new views.Picword({model:wordList});
+             var target = 'count';
+            this.layout.setContent(view, target);
+            this.layout.showSpinner(1500);
+            this.layout.resetSoundManager();
         },
         testRoute: function(){
           var url = Backbone.history.getFragment();
@@ -687,8 +924,9 @@ var app = app || {};
           var lists = {};
           var flag = 0;
           var urlLength = ['test/1', 'test/2'];
-          var target = 'test';
+          var target = 'finaltest';
           var matterCollection = {};
+          var wordList = {};
           switch (url) {
             case 'test/1':
                 flag = 1;
@@ -712,7 +950,7 @@ var app = app || {};
               }
           }
 
-          var createTestViewpages = function(flag){
+          var createFinaltestView = function(flag){
             var listArray = {};
             var listTemp = [];
             var listInfo = {};
@@ -727,44 +965,44 @@ var app = app || {};
                 '3. こちらこそ｡よろしくおねがいします｡'
               ],
               [
-                '1. わたしは かいしゃいんです。',
-                '2. あなたは がくせいですか。',
-                '3. いしださんは モデルですか。'
+                '4. わたしは かいしゃいんです。',
+                '5. あなたは がくせいですか。',
+                '6. いしださんは モデルですか。'
               ],
               [
-                '1. これはりんきょうですか。',
-                '2. わたししのテジカメでは ありません。',
-                '3. あれはひこうきです。'
+                '7. これはりんきょうですか。',
+                '8. わたししのテジカメでは ありません。',
+                '9. あれはひこうきです。'
               ],
               [
-                '1. ともだちのよしのです。',
-                '2. この しゃしんのひとは だれですか。'
+                '10. ともだちのよしのです。',
+                '11. この しゃしんのひとは だれですか。'
               ],
               [
-                'A: ささきさん､うちは どこですか｡',
-                'B: シンチョンです。'
+                '12. ささきさん､うちは どこですか｡',
+                '13. シンチョンです。'
               ],
               [
-                'A: はこの なかに なにが ありますか。',
-                'B: なにも ありません。'
+                '14. はこの なかに なにが ありますか。',
+                '15. なにも ありません。'
               ],
               [
-                '1. このビールは つめたくないです｡',
-                '2. へやは せまくてくらいです｡'
+                '16. このビールは つめたくないです｡',
+                '17. へやは せまくてくらいです｡'
               ],
               [
-                '1. かのじょは きれいな ひとです｡',
-                '2. かれは まじめでは ありません｡',
-                '3. あそこはとてもまじめなレストランです。'
+                '18. かのじょは きれいな ひとです｡',
+                '19. かれは まじめでは ありません｡',
+                '20. あそこはとてもまじめなレストランです。'
               ],
               [
-                '1. ドアを あけますか｡',
-                '2. あさごはんを たべます｡',
-                '3. よる はやく ねません｡'
+                '21. ドアを あけますか｡',
+                '22. あさごはんを たべます｡',
+                '23. よる はやく ねません｡'
               ],
               [
-                '1. かんこくごを おしえます｡',
-                '2. かいしゃの まえで バスを おりますか｡',
+                '24. かんこくごを おしえます｡',
+                '25. かいしゃの まえで バスを おりますか｡',
               ]
             ];
             var testShowAnswer = [
@@ -774,44 +1012,44 @@ var app = app || {};
                 '3. 이쪽이야말로 잘 부탁드립니다. '
               ],
               [
-                '1. 저는 회사원입니다.',
-                '2. 당신은 학생입니까?',
-                '3. 이시다는 모델입니까?'
+                '4. 저는 회사원입니다.',
+                '5. 당신은 학생입니까?',
+                '6. 이시다는 모델입니까?'
               ],
               [
-                '1. 이것은 인형입니까?.',
-                '2. 제 디카가 아니에요.',
-                '3. 저것은 비행기입니다.'
+                '7. 이것은 인형입니까?.',
+                '8. 제 디카가 아니에요.',
+                '9. 저것은 비행기입니다.'
               ],
               [
-                'A: 친구인 요시노입니다.',
-                'B: 이 사진에 있는 사람은 누구입니까?'
+                '10. 친구인 요시노입니다.',
+                '11. 이 사진에 있는 사람은 누구입니까?'
               ],
               [
-                'A: 사사키씨 집은 어디입니까?',
-                'B: 신촌입니다.'
+                '12. 사사키씨 집은 어디입니까?',
+                '13. 신촌입니다.'
               ],
               [
-                'A: 상자 속에 무엇이 있습니까?',
-                'B: 아무것도 없습니다.'
+                '14. 상자 속에 무엇이 있습니까?',
+                '15. 아무것도 없습니다.'
               ],
               [
-                '1. 이 맥주는 차갑지 않습니다.',
-                '2. 방은 좁고 어둡습니다.'
+                '16. 이 맥주는 차갑지 않습니다.',
+                '17. 방은 좁고 어둡습니다.'
               ],
               [
-                '1. 그녀는 예쁜 사람이에요.',
-                '2. 그는 성실하지 않습니다.',
-                '3. 저곳은 굉장히 유명한 레스토랑이에요.'
+                '18. 그녀는 예쁜 사람이에요.',
+                '19. 그는 성실하지 않습니다.',
+                '20. 저곳은 굉장히 유명한 레스토랑이에요.'
               ],
               [
-                '1. 문을 열까요?',
-                '2. 아침밥을 먹습니다.',
-                '3. 밤에 일찍 자지 않아요.'
+                '21. 문을 열까요?',
+                '22. 아침밥을 먹습니다.',
+                '23. 밤에 일찍 자지 않아요.'
               ],
               [
-                '1. 한국어를 가르칩니다.',
-                '2. 회사 앞에서 버스를 내립니까?'
+                '24. 한국어를 가르칩니다.',
+                '25. 회사 앞에서 버스를 내립니까?'
               ]
             ];
             var folderSrc = 'assets/img/test';
@@ -839,17 +1077,131 @@ var app = app || {};
               return listArray;
               console.log(matterCollection);
             }
+          var createCheckerView = function(){
+            //empty Model, Collection Object created.
+            var wordModel = {};
+            //Parent and Child Array and Object created.
+            var wordData = {};
+            var wordList = {};
+            var categoryArray = [];
+            var categoryInfo = {};
+            //Detailed Array
+            var cnt = ['3', '1', '3', '6', '3', '2', '1'];
+            var category = ['checker1', 'checker2', 'checker3', 'checker4', 'checker5', 'checker6'];
+            var answerSelectorNum = ['','①', '②', '③'];
+            var answerSelectorABC = ['', 'A', 'B', 'C'];
+            var answerSelectorAB = ['', 'A', 'B', 'A', 'B', 'A', 'B'];
+            var descriptContent = [
+              [
+                'またね',
+                'バイバイ',
+                'じゃあね'
+              ],
+              [
+                'おじゃまします'
+              ],
+              [
+                'ええ, いたたきます.(O)',
+                'ありがとうございます.(O)',
+                'ごちそうさまでした.(X)'
+              ],
+              [
+              'かばんは　どこに　ありますか.',
+              'いすの　まえに　あります.',
+              'めがねは　どこに　ありますか.',
+              'つくえの　うえに　あります.',
+              'ほんは　どこに　ありますか.',
+              'がばんのなかに　あります.'
+              ],
+              [
+                'おたんじょうび',
+                'ありがとう',
+                'プレゼント'
+              ],
+              [
+                'いただきます',
+                'ごちそうさま'
+              ]
+            ];
+            var answerContent = [
+              [
+                '그럼, 또 보자',
+                '바이바이',
+                '그럼 또 보자'
+              ],
+              [
+                '실례하겠습니다.'
+              ],
+              [
+                '예, 잘먹겠습니다.',
+                '감사합니다.',
+                '잘먹었습니다.'
+              ],
+              [
+                '가방은 어디 있습니까?',
+                '의자 앞에 있습니다. ',
+                '안경은 어디 있습니까? ',
+                '책상 위에 있습니다.',
+                '책은 어디에 있습니까?',
+                '가방 안에 있습니다.'
+              ],
+              [
+                '생일',
+                '고마워',
+                '선물'
+              ],
+              [
+                '잘 먹겠습니다.',
+                '잘 먹었어'
+              ]
+            ]
+            //Create Json as tree model.
+            var idNum = 1;
+            for (var i = 0 ; i < category.length; i++) {
+              for (var j = 0; j < cnt[i]; j++) {
+                var fileNum = j+1;
+                categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+"_"+fileNum+".mp3";
+                categoryInfo.soundId = "sound"+idNum;
+                if(i == 3){
+                    categoryInfo.wordNum = answerSelectorAB[fileNum];
+                  } else if(i > 3){
+                    categoryInfo.wordNum = answerSelectorABC[fileNum];
+                  } else {
+                    categoryInfo.wordNum = answerSelectorNum[fileNum];
+                }
+                categoryInfo.circleId = "circle"+idNum;
+                categoryInfo.blindwordId = "blindword"+idNum;
+                categoryInfo.wordtestId = "word_test"+idNum;
+                categoryInfo.description = descriptContent[i][j];
+                categoryInfo.answer = answerContent[i][j];
+                categoryArray.push(categoryInfo);
+                categoryInfo = {};
+                idNum ++;
+              }
+              wordData[category[i]] = categoryArray;
+              categoryArray = [];
+            }
+              wordList.category = wordData;
+              return wordList;
+          }
           if(jQuery.inArray(url, urlLength) == -1){
             this.layout.setContent(view, target);
             this.layout.showSpinner(300);
-          } else {
-            matterCollection = createTestViewpages(flag);
+          } else if(jQuery.inArray(url, urlLength) == 0) {
+            matterCollection = createFinaltestView(flag);
             //var jsoninfo = JSON.stringify(matterCollection);
             console.log(matterCollection);
             view = new views.Test({model:matterCollection});
-
             this.layout.setContent(view, target);
             this.layout.showSpinner(500);
+          } else if (jQuery.inArray(url, urlLength) == 1){
+            wordList = createCheckerView();
+            console.log(wordList);
+            var view = new views.Livingword({model:wordList});
+            var target = 'checker';
+            this.layout.setContent(view, target);
+            this.layout.showSpinner(1500);
+            this.layout.resetSoundManager();
           }
         }
       });
