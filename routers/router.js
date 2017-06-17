@@ -153,6 +153,7 @@ var app = app || {};
               view = new views.list({collection:lists});
               this.layout.setContent(view, target);
               this.layout.showSpinner(300);
+
             } else if (jQuery.inArray(url, urlLength) == 8){
               jsonInfo = generateList(createListFlag, categoryName, categoryNum);
               lists = new this.lists();
@@ -160,6 +161,7 @@ var app = app || {};
               view = new views.list({collection:lists});
               this.layout.setContent(view, target);
               this.layout.showSpinner(300);
+
             } else {
               jsonInfo = generateList(createListFlag, categoryName, categoryNum);
               lists = new this.lists();
@@ -167,6 +169,7 @@ var app = app || {};
               view = new views.list({collection:lists});
               this.layout.setContent(view, target);
               this.layout.showSpinner(500);
+
             }
         },
         cultureRoute: function(){
@@ -301,6 +304,7 @@ var app = app || {};
             console.log(cultureData);
             this.layout.setContent(view, target);
             this.layout.showSpinner(2500);
+            
         },
         livingwordRoute: function(){
           //empty Model, Collection Object created.

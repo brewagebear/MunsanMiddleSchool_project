@@ -71,18 +71,6 @@ var app = app || {};
         },
         resetSoundManager: function(){
             soundManager.reboot();
-        },
-        closeSlideMenu: function(){
-          // $('#slide-out').css({
-          //   '-webkit-transform' : 'translate(left, top)',
-          //   '-moz-transform'    : 'translate(left, top)',
-          //   '-ms-transform'     : 'translate(left, top)',
-          //   '-o-transform'      : 'translate(left, top)',
-          //   'transform'         : 'translate(left, top)'
-          // });
-          // $('#slide-out').css('transform', 'translateX(-100%)');
-          // $('#slide-out').css('-webkit-transform', 'translate(-100%)');
-          // $('#sidenav-overlay').css('display', 'none');
         }
     });
 

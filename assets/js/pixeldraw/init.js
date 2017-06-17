@@ -74,6 +74,18 @@ cultureModal.click(function(e){
   });
 });
 
+// var isClickCircle = $('.circle');
+//
+//   isClickCircle.click(function(){
+//     var id = $(this).attr('id');
+//     var circleId  = $('#circle'+id);
+//     console.log(circleId);
+//
+//       $('#circle'+id).css('background-color', 'white');
+//       $('#blindword'+id).css('display', 'none');
+//       $('#word_test'+id).css('display', 'block');
+// });
+
   $(".waves-effect").click(function(){
     var getTestStatement = $(this).find('.testWord');
     var getAnswerStatement = $(this).find('.answerSection');
