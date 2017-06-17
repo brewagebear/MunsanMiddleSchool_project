@@ -5381,7 +5381,7 @@ button.btn-floating {
 
 @media only screen and (max-width: 992px) {
   .modal {
-    width: 80%;
+    width: 95%;
   }
 }
 
@@ -5401,13 +5401,13 @@ button.btn-floating {
   border-radius: 0 0 2px 2px;
   background-color: #fafafa;
   padding: 4px 6px;
-  height: 56px;
+  height: 25px;
   width: 100%;
 }
 
 .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
   float: right;
-  margin: 6px 0;
+  margin: auto;
 }
 
 .modal-overlay {

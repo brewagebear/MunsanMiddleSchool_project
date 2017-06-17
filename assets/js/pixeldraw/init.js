@@ -37,7 +37,7 @@ defaultModal.click(function(e){
     var titleContent = $(this).find('.title').text();
 
     var modalViewSelect = titleId;
-    var tmpl_dir = '../www/assets/static/modalview';
+    var tmpl_dir = '../assets/static/modalview';
     var tmpl_url = tmpl_dir + '/' + modalViewSelect + '.html';
 
     $.ajax({
@@ -48,7 +48,7 @@ defaultModal.click(function(e){
         success: function (data) {
               $("#title").html(titleContent);
               $("#content").html(data);
-              $("#myModal").modal('show');
+              $("#defaultModal").modal('show');
           }
     });
   });
@@ -58,7 +58,7 @@ cultureModal.click(function(e){
   var titleContent = $(this).find('.title').text();
 
   var modalViewSelect = titleId;
-  var tmpl_dir = '../www/assets/static/modalview';
+  var tmpl_dir = '../assets/static/modalview';
   var tmpl_url = tmpl_dir + '/culture/' + modalViewSelect + '.html';
 
   $.ajax({
@@ -67,8 +67,8 @@ cultureModal.click(function(e){
       async: false,
       dataType : 'html',
       success: function (data) {
-            $("#title").html(titleContent);
-            $("#content").html(data);
+            $("#longModalTitle").html(titleContent);
+            $("#longModalContent").html(data);
             $("#longModal").modal('show');
         }
   });

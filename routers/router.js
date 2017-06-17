@@ -77,30 +77,25 @@ var app = app || {};
             case 'list/5':
                 createListFlag = 4;
                 categoryNum = createListFlag+1;
-                categoryName = categoryName[4];
+                categoryName = categoryName[5];
                 break;
             case 'list/6':
                 createListFlag = 5;
                 categoryNum = createListFlag+1;
-                categoryName = categoryName[5];
+                categoryName = categoryName[6];
                 break;
             case 'list/7':
                 createListFlag = 6;
                 categoryNum = createListFlag+1;
-                categoryName = categoryName[6];
+                categoryName = categoryName[7];
                 break;
             case 'list/8':
                 createListFlag = 7;
                 categoryNum = createListFlag+1;
-                categoryName = categoryName[7];
+                categoryName = categoryName[8];
                 break;
             case 'list/9':
                 createListFlag = 8;
-                categoryNum = createListFlag+1;
-                categoryName = categoryName[8];
-                break;
-            case 'list/10':
-                createListFlag = 9;
                 categoryNum = createListFlag+1;
                 categoryName = categoryName[9];
                 break;
@@ -111,8 +106,8 @@ var app = app || {};
           var generateList = function(flages, categoryName, categoryNum){
             var listArray = new Array();
             var listInfo = new Object();
-            var listLength = ['4', '5', '4', '9', '6', '5', '5', '6', '5', '7'];
-            var folderName = ['call', 'diner', 'etc', 'hospital', 'livejapanese', 'shopping', 'sport', 'tour', 'traffic', 'main'];
+            var listLength = ['4', '5', '4', '9', '5', '5', '6', '5', '7'];
+            var folderName = ['call', 'diner', 'etc', 'hospital', 'shopping', 'sport', 'tour', 'traffic', 'main'];
             var description = ['회화 인트로 동영상', '회화동영상'];
 
             listInfo.category = categoryName;
@@ -316,11 +311,11 @@ var app = app || {};
           var categoryArray = [];
           var categoryInfo = {};
           //Detailed Array
-          var cnt = ['8', '12', '9', '7', '8', '6', '11', '10', '10', '8'];
-          var category = ['bedroom', 'sink', 'desk', 'blackfast', 'cleaning', 'bathroom', 'livingroom', 'entrance', 'washingmachine'];
+          var cnt = ['8', '12', '9', '7', '8', '7', '11', '10', '11', '9'];
+          var category = ['bedroom', 'sink', 'desk', 'blackfast', 'cleaning', 'bathroom', 'livingroom', 'entrance', 'invitation', 'washingmachine'];
           var number = ['', '①', '②', '③', '④', '⑤', '⑥', '⑦',  '⑧', '⑨', '⑩', '⑪', '⑫', '⑬', '⑭','⑮'];
           var wordContent = [
-            [
+            [ //bedroom
               'スタンド',
               'めざましいどけい',
               'めがね',
@@ -331,7 +326,7 @@ var app = app || {};
               'まくら',
               'ベット'
             ],
-            [
+            [ //sink
               'かがみ',
               'でんとうはブラシ',
               'ティッシュ',
@@ -346,7 +341,7 @@ var app = app || {};
               'タオルかけ',
               'かみそり'
             ],
-            [
+            [ //desk
               'じしょ',
               'つくえ',
               'ふでばこ',
@@ -358,7 +353,7 @@ var app = app || {};
               'ほんだな',
               'ほん'
             ],
-            [
+            [ //blackfast
               'マグカップ',
             　'ミルク',
             　'シリアル',
@@ -368,7 +363,7 @@ var app = app || {};
             　'コーヒーメーカ',
             　'トースト'
             ],
-            [
+            [ //cleaning
               'モップ',
               'バケツ',
               'ほこり',
@@ -379,7 +374,7 @@ var app = app || {};
               'そうじき',
               'ゴミぶくろ',
             ],
-            [
+            [ //bathroom
               'シャワーキ',
               'キャップ',
               'ゆぶね',
@@ -388,7 +383,7 @@ var app = app || {};
               'リンス',
               'シャーンプ'
             ],
-            [
+            [ //livingroom
               'かべ',
               'まど',
               'カーテン',
@@ -402,7 +397,7 @@ var app = app || {};
               'クッション',
               'エアコン',
             ],
-            [
+            [ //entrance
               'ながぶつ',
               'おりたたみかさ',
               'くつ',
@@ -415,7 +410,7 @@ var app = app || {};
               'オートロック',
               'げんかんのドア'
             ],
-            [
+            [ //invitation
               'ふうせん',
               'コーラ',
               'アイスクリーム',
@@ -428,17 +423,17 @@ var app = app || {};
               'プレゼント',
               'ろうそく'
             ],
-            [
+            [ //washingmachine
               'せんたくき',
-              'しみ',
+  　          'しみ',
               'ゴムてぶくろ',
-              'せんたくかご',
-              'せんざい',
-              'じゅうなんざい',
-              'れいすい',
+  　          'せんたくかご',
+  　          'せんざい',
+  　          'じゅうなんざい',
+  　          'れいすい',
               'ぬるまゆ',
-              'おゆ'
-            ],
+  　          'おゆ'
+            ]
           ];
           //Created Model and Collection.
           wordModel = new this.word();
@@ -706,8 +701,8 @@ var app = app || {};
           var categoryArray = [];
           var categoryInfo = {};
           //Detailed Array
-          var cnt = ['15', '15', '5', '20'];
-          var category = ['number_cnt', 'minute_cnt', 'price_cnt', 'peopleAnditem_cnt'];
+          var cnt = ['15', '15', '10', '20'];
+          var category = ['number_cnt', 'minute_cnt', 'priceAndminute_cnt', 'peopleAnditem_cnt'];
           var divNumber_cntKOR = [
             '200',
             '500',
@@ -782,19 +777,14 @@ var app = app || {};
               '260￥',
               '420￥',
               '120￥',
-              '150￥'
+              '150￥',
+              '2시 15분',
+              '4시 50분',
+              '7시 10분',
+              '10시 24분',
+              '10시 30분'
             ],
             [
-              '1명',
-              '2명',
-              '3명',
-              '4명',
-              '5명',
-              '6명',
-              '7명',
-              '8명',
-              '9명',
-              '10명',
               '하나',
               '둘',
               '셋',
@@ -804,9 +794,17 @@ var app = app || {};
               '일곱',
               '여덟',
               '아홉',
-              '여덟',
-              '아홉',
-              '열'
+              '열',
+              '1명',
+              '2명',
+              '3명',
+              '4명',
+              '5명',
+              '6명',
+              '7명',
+              '8명',
+              '9명',
+              '10명'
             ]
           ];
           var showJpn = [
@@ -849,7 +847,12 @@ var app = app || {};
               'にひゃくろくじゅうえん',
               'よんひゃくにじゃうえん',
               'ひゃくにじゅうえん',
-              'びゃくごじゅえん'
+              'びゃくごじゅえん',
+                '2시 15분',
+              '4시 50분',
+              '7시 10분',
+              '10시 24분',
+              '10시 30분'
             ],
             [
               'ひとり',
@@ -884,11 +887,7 @@ var app = app || {};
             for (var j = 0; j < cnt[i]; j++) {
               var fileNum = j+1;
               categoryInfo.audioSrc = "assets/audios/"+category[i]+"/"+category[i]+fileNum+".mp3";
-              if(i == 2){
-                categoryInfo.imgSrc = "assets/img/katakana/"+category[i]+"/"+category[i]+fileNum+".jpg";
-              } else {
-                categoryInfo.imgSrc = "assets/img/katakana/"+category[i]+"/"+category[i]+fileNum+".png";
-              }
+              categoryInfo.imgSrc = "assets/img/count/"+category[i]+"/"+category[i]+fileNum+".png";
               categoryInfo.soundId = "sound"+idNum;
               categoryInfo.circleId = "circle"+idNum;
               categoryInfo.blindwordId = "blindword"+idNum;
